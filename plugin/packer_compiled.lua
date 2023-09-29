@@ -84,6 +84,16 @@ _G.packer_plugins = {
     path = "/home/alec/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
   },
+  ["copilot.vim"] = {
+    loaded = true,
+    path = "/home/alec/.local/share/nvim/site/pack/packer/start/copilot.vim",
+    url = "https://github.com/github/copilot.vim"
+  },
+  ["git-blame.nvim"] = {
+    loaded = true,
+    path = "/home/alec/.local/share/nvim/site/pack/packer/start/git-blame.nvim",
+    url = "https://github.com/f-person/git-blame.nvim"
+  },
   harpoon = {
     loaded = true,
     path = "/home/alec/.local/share/nvim/site/pack/packer/start/harpoon",
@@ -133,6 +143,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/alec/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
+  },
+  ["typescript.nvim"] = {
+    loaded = true,
+    path = "/home/alec/.local/share/nvim/site/pack/packer/start/typescript.nvim",
+    url = "https://github.com/jose-elias-alvarez/typescript.nvim"
   },
   undotree = {
     loaded = true,

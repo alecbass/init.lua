@@ -40,6 +40,10 @@ return require('packer').startup(function(use)
 		  {'L3MON4D3/LuaSnip'},
 	  }
   }
+  -- Copilot
+  use('github/copilot.vim')
+  use('jose-elias-alvarez/typescript.nvim')
+  use('f-person/git-blame.nvim')
 
 end)
 
