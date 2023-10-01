@@ -42,26 +42,18 @@ end)
 lspconfig.rust_analyzer.setup{}
 lspconfig.eslint.setup{}
 -- Python
-lspconfig.pylsp.setup{
+
+-- https://github.com/microsoft/pyright/blob/main/docs/configuration.md
+lspconfig.pyright.setup {
     settings = {
-        pylsp = {
-            plugins = {
-                pycodestyle = {
-                    ignore = {'W391'},
-                    maxLineLength = 120
-                },
-                autopep8 = {
-                    enabled = true
-                },
-                ruff = {
-                    enabled = true,
-                    lineLength = 120,
-                }
+        python = {
+            analysis = {
+                reportWildcardImportFromLibrary = "none",
+                reportUnknownMemberType = "none",
             }
         }
     }
 }
-lspconfig.pyright.setup {}
 lspconfig.ruff_lsp.setup{
   init_options = {
     settings = {
@@ -91,4 +83,35 @@ rust_tools.setup({
     end
   }
 })
+
+
+-- Diagnostic Language Server
+lspconfig.diagnosticls.setup {
+    filetypes = { "*" },
+    init_options = {
+        linters = {
+            ligma = {
+                command = "/Users/nickhenderson/Projects/Ligma/ligma.py",
+                sourceName = "python3",
+                args = { "%filepath" },
+                formatPattern = {
+                    "^(\\d+):(\\d+):(\\d+):([^:]+):([^:]+)$",
+                    {
+                        line = 1,
+                        column = 2,
+                        endColumn = 3,
+                        security = 4,
+                        message = 5,
+                    },
+                },
+                securities = {
+                    info = "info"
+                }
+            }
+        },
+        filetypes = {
+            ["*"] = { "ligma" }
+        }
+    }
+}
 

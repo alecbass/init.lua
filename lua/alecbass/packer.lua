@@ -23,6 +23,15 @@ return require('packer').startup(function(use)
   use 'nvim-lua/plenary.nvim'
   use 'mfussenegger/nvim-dap'
 
+  -- Colours
+  use({
+      'rose-pine/neovim',
+      as = 'rose-pine',
+      config = function ()
+          vim.cmd('colorscheme rose-pine')
+      end
+  })
+
   -- LSP-Zero
   use {
 	  'VonHeikemen/lsp-zero.nvim',
@@ -44,6 +53,13 @@ return require('packer').startup(function(use)
   use('github/copilot.vim')
   use('jose-elias-alvarez/typescript.nvim')
   use('f-person/git-blame.nvim')
+
+  -- Diagnostic Language serveri
+  use {
+      'creativenull/diagnosticls-configs-nvim',
+      tag = 'v0.1.8', -- `tag` is optional
+      requires = 'neovim/nvim-lspconfig',
+  }
 
 end)
 
