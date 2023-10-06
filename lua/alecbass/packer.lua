@@ -380,6 +380,11 @@ return require('packer').startup(function(use)
 
         use("nvim-treesitter/nvim-treesitter-context")
 
+        -- Tabby
         use("nanozuki/tabby.nvim")
+
+        -- Bufferline
+        use({"akinsho/bufferline.nvim", tag = "*", requires = "nvim-tree/nvim-web-devicons"})
+
 end)
 
