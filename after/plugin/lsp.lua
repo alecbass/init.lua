@@ -114,3 +114,6 @@ lspconfig.diagnosticls.setup {
     }
 }
 
+-- Bash
+require'lspconfig'.bashls.setup{}
+
