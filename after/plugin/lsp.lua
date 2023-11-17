@@ -179,3 +179,12 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 lspconfig.html.setup({
 	capabilities = capabilities,
 })
+
+-- Styling (CSS/SCSS)
+lspconfig.stylelint_lsp.setup({
+	settings = {
+		stylelintplus = {
+			-- see available options in stylelint-lsp documentation
+		},
+	},
+})
