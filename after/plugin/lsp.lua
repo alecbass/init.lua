@@ -188,3 +188,8 @@ lspconfig.stylelint_lsp.setup({
 		},
 	},
 })
+
+-- JSON
+lspconfig.jsonls.setup({
+	capabilities = capabilities,
+})
