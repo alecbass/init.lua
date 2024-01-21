@@ -75,7 +75,9 @@ lspconfig.ruff_lsp.setup({
 	init_options = {
 		settings = {
 			-- Any extra CLI arguments for `ruff` go here.
-			args = {},
+			args = {
+				"--line-length=120",
+			},
 			organizeImports = false,
 			["lint.run"] = "onSave",
 		},

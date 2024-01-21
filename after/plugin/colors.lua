@@ -9,6 +9,11 @@ require("rose-pine").setup({
 	disable_float_background = false,
 	disable_italics = true,
 
+	styles = {
+		bold = false,
+		italic = false,
+	},
+
 	--- @usage string hex value or named color from rosepinetheme.com/palette
 	groups = {
 		background = "base",
