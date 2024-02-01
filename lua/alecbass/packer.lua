@@ -391,4 +391,7 @@ return require("packer").startup(function(use)
 	use({
 		"numToStr/Comment.nvim",
 	})
+
+	-- vtsls (TypeScript)
+	use("yioneko/nvim-vtsls")
 end)

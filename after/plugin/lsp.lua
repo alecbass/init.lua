@@ -48,6 +48,12 @@ lsp.on_attach(function(client, bufnr)
 	})
 end)
 
+lspconfig.opts = {
+	inlay_hints = {
+		enabled = true,
+	},
+}
+
 ---
 -- Replace these language servers
 -- with the ones you have installed in your system
@@ -95,6 +101,32 @@ lspconfig.ruff_lsp.setup({
 --  }
 --})
 
+--
+-- JavaScript / TypeScript
+--
+--
+
+-- lspconfig.configs.vtsls = require("vtsls").lspconfig
+
+lspconfig.vtsls.setup({
+	settings = {
+		typescript = {
+			inlayHints = {
+				parameterNames = { enabled = "literals" },
+				parameterTypes = { enabled = true },
+				variableTypes = { enabled = true },
+				propertyDeclarationTypes = { enabled = true },
+				functionLikeReturnTypes = { enabled = true },
+				enumMemberValues = { enabled = true },
+			},
+		},
+	},
+})
+
+--
+-- Rust
+--
+
 local rust_tools = require("rust-tools")
 
 rust_tools.setup({
@@ -105,7 +137,9 @@ rust_tools.setup({
 	},
 })
 
+--
 -- Diagnostic Language Server
+--
 local eslint = require("diagnosticls-configs.linters.eslint")
 local prettier = require("diagnosticls-configs.formatters.prettier")
 local black = require("diagnosticls-configs.formatters.black")
@@ -171,10 +205,14 @@ lspconfig.diagnosticls.setup({
 	},
 })
 
+--
 -- Bash
-require("lspconfig").bashls.setup({})
+--
+lspconfig.bashls.setup({})
 
+--
 -- HTML
+--
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
