@@ -10,5 +10,6 @@ conform.setup({
 		javascriptreact = { "prettier" },
 		typescript = { "prettier" },
 		typescriptreact = { "prettier" },
+        rust = { "rustfmt" },
 	},
 })

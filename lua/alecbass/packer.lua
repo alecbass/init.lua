@@ -386,6 +386,7 @@ return require("packer").startup(function(use)
 	-- Conform
 	use({
 		"stevearc/conform.nvim",
+		commit = "0b6ef80e052150391ded101a0a2720f24f5200e9", -- We can use the latest once on Neovim 0.10
 	})
 
 	use({

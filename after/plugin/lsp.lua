@@ -20,6 +20,8 @@ cmp.setup({
 	}),
 })
 
+local conform = require("conform")
+
 lsp.on_attach(function(client, bufnr)
 	-- see :help lsp-zero-keybindings
 	-- to learn the available actions
@@ -40,9 +42,9 @@ lsp.on_attach(function(client, bufnr)
 
 	-- Set up autoformatting
 	vim.api.nvim_create_autocmd("BufWritePre", {
-		buffer = bufnr,
-		callback = function()
-			require("conform").format({ bufnr = buffer })
+        pattern = "*",
+		callback = function(args)
+			conform.format({ bufnr = args.buf })
 			-- vim.lsp.buf.format()
 		end,
 	})
