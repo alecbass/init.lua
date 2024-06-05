@@ -42,7 +42,7 @@ lsp.on_attach(function(client, bufnr)
 
 	-- Set up autoformatting
 	vim.api.nvim_create_autocmd("BufWritePre", {
-        pattern = "*",
+		pattern = "*",
 		callback = function(args)
 			conform.format({ bufnr = args.buf })
 			-- vim.lsp.buf.format()
