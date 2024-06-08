@@ -389,10 +389,14 @@ return require("packer").startup(function(use)
 		commit = "0b6ef80e052150391ded101a0a2720f24f5200e9", -- We can use the latest once on Neovim 0.10
 	})
 
+	-- Commenting
 	use({
 		"numToStr/Comment.nvim",
 	})
 
-	-- vtsls (TypeScript)
-	use("yioneko/nvim-vtsls")
+	-- Statusline
+	use({
+		"nvim-lualine/lualine.nvim",
+		requires = { "nvim-tree/nvim-web-devicons", opt = true },
+	})
 end)
