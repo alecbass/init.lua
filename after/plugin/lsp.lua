@@ -33,7 +33,7 @@ lsp.on_attach(function(client, bufnr)
 		vim.lsp.buf.definition()
 	end, opts)
 	vim.keymap.set("n", "<leader>f", function()
-		vim.lsp.buf.format()({ async = true })
+		conform.format({ bufnr = bufnr })
 	end, opts)
 	vim.keymap.set("n", "<leader><F2>", function()
 		vim.lsp.buf.rename()
@@ -44,7 +44,7 @@ lsp.on_attach(function(client, bufnr)
 	vim.api.nvim_create_autocmd("BufWritePre", {
 		pattern = "*",
 		callback = function(args)
-			conform.format({ bufnr = args.buf })
+			-- conform.format({ bufnr = args.buf })
 			-- vim.lsp.buf.format()
 		end,
 	})
