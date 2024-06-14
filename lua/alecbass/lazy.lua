@@ -14,17 +14,6 @@ vim.opt.rtp:prepend(lazypath)
 local lazy = require("lazy")
 
 local plugins = {
-    -- Codeium, not currently used
-	{
-		"Exafunction/codeium.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"hrsh7th/nvim-cmp",
-		},
-		config = function()
-			require("codeium").setup({})
-		end,
-	},
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.6",
@@ -410,10 +399,7 @@ local plugins = {
 	{ "akinsho/bufferline.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
 
 	-- Conform
-	{
-		"stevearc/conform.nvim",
-		commit = "0b6ef80e052150391ded101a0a2720f24f5200e9", -- We can use the latest once on Neovim 0.10
-	},
+	{ "stevearc/conform.nvim" },
 
 	-- Commenting
 	{
