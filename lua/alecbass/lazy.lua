@@ -1,43 +1,69 @@
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
-
--- Only required if you have packer configured as `opt`
-vim.cmd([[packadd packer.nvim]])
-
-return require("packer").startup(function(use)
-	-- Packer can manage itself
-	use("wbthomason/packer.nvim")
-
-	use({
-		"nvim-telescope/telescope.nvim",
-		tag = "0.1.3",
-		-- or                            , branch = '0.1.x',
-		requires = { { "nvim-lua/plenary.nvim" } },
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
 	})
-	use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
-	use("theprimeagen/harpoon")
-	use("mbbill/undotree")
-	use("tpope/vim-fugitive")
-	use("neovim/nvim-lspconfig")
-	use("simrat39/rust-tools.nvim")
+end
+vim.opt.rtp:prepend(lazypath)
+
+local lazy = require("lazy")
+
+local plugins = {
+    -- Codeium, not currently used
+	{
+		"Exafunction/codeium.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"hrsh7th/nvim-cmp",
+		},
+		config = function()
+			require("codeium").setup({})
+		end,
+	},
+	{
+		"nvim-telescope/telescope.nvim",
+		tag = "0.1.6",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"hrsh7th/nvim-cmp",
+		},
+	},
+	{
+		"nvim-treesitter/nvim-treesitter",
+		config = function()
+			-- vim.cmd(":TSUpdate")
+		end,
+	},
+
+	{ "theprimeagen/harpoon" },
+	{ "mbbill/undotree" },
+	{ "tpope/vim-fugitive" },
+	{ "neovim/nvim-lspconfig" },
+	{ "simrat39/rust-tools.nvim" },
 
 	-- Debugging
-	use("nvim-lua/plenary.nvim")
-	use("mfussenegger/nvim-dap")
+	{ "nvim-lua/plenary.nvim" },
+	{ "mfussenegger/nvim-dap" },
 
 	-- Colours
-	use({
+	{
 		"rose-pine/neovim",
-		as = "rose-pine",
+		name = "rose-pine",
 		config = function()
 			vim.cmd("colorscheme rose-pine")
 		end,
-	})
+	},
 
 	-- LSP-Zero
-	use({
+	{
 		"VonHeikemen/lsp-zero.nvim",
 		branch = "v3.x",
-		requires = {
+		dependencies = {
 			--- Uncomment these if you want to manage LSP servers from neovim
 			-- {'williamboman/mason.nvim'},
 			-- {'williamboman/mason-lspconfig.nvim'},
@@ -49,30 +75,30 @@ return require("packer").startup(function(use)
 			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "L3MON4D3/LuaSnip" },
 		},
-	})
+	},
 	-- Copilot
-	use("github/copilot.vim")
-	use("jose-elias-alvarez/typescript.nvim")
-	use("f-person/git-blame.nvim")
+	{ "github/copilot.vim" },
+	{ "jose-elias-alvarez/typescript.nvim" },
+	{ "f-person/git-blame.nvim" },
 
-	-- Diagnostic Language serveri
-	use({
+	-- Diagnostic Language server
+	{
 		"creativenull/diagnosticls-configs-nvim",
 		tag = "v0.1.8", -- `tag` is optional
-		requires = "neovim/nvim-lspconfig",
-	})
+		dependencies = "neovim/nvim-lspconfig",
+	},
 
 	-- Telescope File Browser
-	use({
+	{
 		"nvim-telescope/telescope-file-browser.nvim",
-		requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
-	})
+		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
+	},
 
 	-- neo-tree
-	use({
+	{
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v3.x",
-		requires = {
+		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
 			"MunifTanjim/nui.nvim",
@@ -158,16 +184,16 @@ return require("packer").startup(function(use)
 					git_status = {
 						symbols = {
 							-- Change type
-							added = "A", -- or "✚", but this is redundant info if you use git_status_colors on the name
-							modified = "M", -- or "", but this is redundant info if you use git_status_colors on the name
+							added = "➕", -- or "✚", but this is redundant info if you use git_status_colors on the name
+							modified = "✏️", -- or "", but this is redundant info if you use git_status_colors on the name
 							deleted = "✖", -- this can only be used in the git_status source
 							renamed = "R", -- this can only be used in the git_status source
 							-- Status type
 							untracked = "U",
-							ignored = "",
-							unstaged = "󰄱",
-							staged = "",
-							conflict = "",
+							ignored = "🕵️",
+							unstaged = "👶",
+							staged = "👟",
+							conflict = "⚔️",
 						},
 					},
 					-- If you don't want to use these columns, you can set `enabled = false` for each of them individually
@@ -373,30 +399,32 @@ return require("packer").startup(function(use)
 
 			vim.cmd([[nnoremap \ :Neotree reveal<cr>]])
 		end,
-	})
+	},
 
-	use("nvim-treesitter/nvim-treesitter-context")
+	{ "nvim-treesitter/nvim-treesitter-context" },
 
 	-- Tabby
-	use("nanozuki/tabby.nvim")
+	{ "nanozuki/tabby.nvim" },
 
 	-- Bufferline
-	use({ "akinsho/bufferline.nvim", tag = "*", requires = "nvim-tree/nvim-web-devicons" })
+	{ "akinsho/bufferline.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
 
 	-- Conform
-	use({
+	{
 		"stevearc/conform.nvim",
 		commit = "0b6ef80e052150391ded101a0a2720f24f5200e9", -- We can use the latest once on Neovim 0.10
-	})
+	},
 
 	-- Commenting
-	use({
+	{
 		"numToStr/Comment.nvim",
-	})
+	},
 
 	-- Statusline
-	use({
+	{
 		"nvim-lualine/lualine.nvim",
-		requires = { "nvim-tree/nvim-web-devicons", opt = true },
-	})
-end)
+		dependencies = { "nvim-tree/nvim-web-devicons", opt = true },
+	},
+}
+
+lazy.setup(plugins, opts)
