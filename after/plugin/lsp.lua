@@ -60,7 +60,6 @@ lspconfig.opts = {
 -- Replace these language servers
 -- with the ones you have installed in your system
 ---
-lspconfig.rust_analyzer.setup({})
 lspconfig.eslint.setup({})
 -- Python
 
@@ -129,15 +128,7 @@ lspconfig.vtsls.setup({
 -- Rust
 --
 
-local rust_tools = require("rust-tools")
-
-rust_tools.setup({
-	server = {
-		on_attach = function(client, bufnr)
-			vim.keymap.set("n", "<leader>ca", rust_tools.hover_actions.hover_actions, { buffer = bufnr })
-		end,
-	},
-})
+lspconfig.rust_analyzer.setup({})
 
 --
 -- Diagnostic Language Server
@@ -211,6 +202,12 @@ lspconfig.diagnosticls.setup({
 -- Bash
 --
 lspconfig.bashls.setup({})
+
+--
+-- Django
+--
+
+lspconfig.djlsp.setup({})
 
 --
 -- HTML
