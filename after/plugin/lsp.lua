@@ -232,3 +232,43 @@ lspconfig.stylelint_lsp.setup({
 lspconfig.jsonls.setup({
 	capabilities = capabilities,
 })
+
+--
+-- HTMX
+--
+
+lspconfig.htmx.setup({})
+
+
+--
+-- Docker Compose
+--
+lspconfig.docker_compose_language_service.setup({})
+
+--
+-- Docker
+--
+lspconfig.dockerls.setup({
+    settings = {
+        docker = {
+            languageserver = {
+                formatter = {
+                ignoreMultilineInstructions = true,
+                },
+            },
+        }
+    }
+})
+
+--
+-- C/C++/Objective-C and Swift
+--
+lspconfig.sourcekit.setup({
+    filetypes = { 
+        -- "swift", 
+        "c", 
+        "cpp", 
+        -- "objective-c", 
+        -- "objective-cpp"
+    }
+})
