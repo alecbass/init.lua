@@ -221,6 +221,7 @@ lspconfig.html.setup({
 
 -- Styling (CSS/SCSS)
 lspconfig.stylelint_lsp.setup({
+    cmd = { "stylelint-lsp", "--stdio" },
 	settings = {
 		stylelintplus = {
 			-- see available options in stylelint-lsp documentation
@@ -262,7 +263,7 @@ lspconfig.dockerls.setup({
 
 --
 -- C/C++/Objective-C and Swift
---
+
 lspconfig.sourcekit.setup({
     filetypes = { 
         -- "swift", 
@@ -271,4 +272,25 @@ lspconfig.sourcekit.setup({
         -- "objective-c", 
         -- "objective-cpp"
     }
+})
+
+--
+-- SQL
+--
+
+lspconfig.sqls.setup({
+  on_attach = function(client, bufnr)
+    require("sqls").on_attach(client, bufnr) -- require sqls.nvim
+  end,
+  settings = {
+    sqls = {
+      connections = {
+        {
+          driver = "postgresql",
+          -- DropSpot specific
+          dataSourceName = "host=127.0.0.1 port=5432 user=dropspot password=dropspot dbname=dropspot sslmode=disable",
+        },
+      },
+    },
+  },
 })
