@@ -69,6 +69,11 @@ local plugins = {
 			{ "L3MON4D3/LuaSnip" },
 		},
 	},
+    -- Mason
+    {
+        "williamboman/mason.nvim",
+    },
+
 	-- Copilot
 	{ "github/copilot.vim" },
 	{ "jose-elias-alvarez/typescript.nvim" },
