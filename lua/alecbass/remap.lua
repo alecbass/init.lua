@@ -19,10 +19,13 @@ vim.keymap.set("x", "<leader>p", [["_dP]])
 -- Capital Q is "the worst place in the universe"
 vim.keymap.set("n", "Q", "<nop>")
 
+-- LSPSaga
+vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>")
+
 -- From Nick
-vim.keymap.set("n", "K", function()
-	vim.lsp.buf.hover()
-end, opts)
+-- vim.keymap.set("n", "K", function()
+-- 	vim.lsp.buf.hover()
+-- end, opts)
 vim.keymap.set("n", "<leader>vws", function()
 	vim.lsp.buf.workspace_symbol()
 end, opts)
