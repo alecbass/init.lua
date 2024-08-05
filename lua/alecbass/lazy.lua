@@ -75,7 +75,7 @@ local plugins = {
     },
 
 	-- Copilot
-	{ "github/copilot.vim" },
+	-- { "github/copilot.vim" },
 	{ "jose-elias-alvarez/typescript.nvim" },
 	{ "f-person/git-blame.nvim" },
 
