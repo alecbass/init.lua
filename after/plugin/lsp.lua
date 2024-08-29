@@ -131,6 +131,12 @@ lspconfig.vtsls.setup({
 lspconfig.rust_analyzer.setup({})
 
 --
+-- Go
+--
+
+lspconfig.gopls.setup({})
+
+--
 -- Diagnostic Language Server
 --
 local eslint = require("diagnosticls-configs.linters.eslint")
