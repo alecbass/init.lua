@@ -432,6 +432,11 @@ local plugins = {
             "nvim-tree/nvim-web-devicons",     -- optional
         },
     },
+
+    -- Indentation selection
+    {
+        "michaeljsmith/vim-indent-object"
+    },
 }
 
 lazy.setup(plugins, opts)
