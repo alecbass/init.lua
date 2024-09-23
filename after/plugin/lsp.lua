@@ -275,14 +275,23 @@ lspconfig.dockerls.setup({
 -- C/C++/Objective-C and Swift
 
 lspconfig.sourcekit.setup({
-    filetypes = { 
-        -- "swift", 
-        "c", 
-        "cpp", 
-        -- "objective-c", 
-        -- "objective-cpp"
-    }
+    -- filetypes = { 
+    --     -- "swift", 
+    --     "c", 
+    --     "cpp", 
+    --     -- "objective-c", 
+    --     -- "objective-cpp"
+    -- },
+    capabilities = {
+        workspace = {
+            didChangeWatchedFiles = {
+                dynamicRegistration = true,
+            },
+        },
+    },
 })
+
+lspconfig.clangd.setup({})
 
 --
 -- SQL
