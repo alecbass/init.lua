@@ -75,7 +75,7 @@ lspconfig.pyright.setup({
 	},
 })
 
-lspconfig.ruff_lsp.setup({
+lspconfig.ruff.setup({
 	on_attach = function(client, bufnr)
 		client.server_capabilities.hoverProvider = false
 	end,
@@ -135,6 +135,7 @@ lspconfig.rust_analyzer.setup({})
 --
 
 lspconfig.gopls.setup({})
+lspconfig.templ.setup({})
 
 --
 -- Diagnostic Language Server
