@@ -135,7 +135,14 @@ lspconfig.rust_analyzer.setup({})
 --
 
 lspconfig.gopls.setup({})
-lspconfig.templ.setup({})
+
+vim.filetype.add({ extension = { templ = "templ" } })
+
+local lspconfig = require("lspconfig")
+
+lspconfig.templ.setup({
+    on_attach = on_attach
+})
 
 --
 -- Diagnostic Language Server
