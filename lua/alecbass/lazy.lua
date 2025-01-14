@@ -61,6 +61,10 @@ local plugins = {
         "williamboman/mason.nvim",
     },
 
+    -- Used for LSP completion windows
+    { "hrsh7th/nvim-cmp" },
+    { "hrsh7th/cmp-nvim-lsp" },
+
 	-- Copilot
 	-- { "github/copilot.vim" },
 	{ "jose-elias-alvarez/typescript.nvim" },
