@@ -37,7 +37,10 @@ local plugins = {
 	{ "theprimeagen/harpoon" },
 	{ "mbbill/undotree" },
 	{ "tpope/vim-fugitive" },
+
+    -- Lspconfig
 	{ "neovim/nvim-lspconfig" },
+
 	{ "simrat39/rust-tools.nvim" },
 
 	-- Debugging
@@ -53,23 +56,6 @@ local plugins = {
 		end,
 	},
 
-	-- LSP-Zero
-	{
-		"VonHeikemen/lsp-zero.nvim",
-		branch = "v3.x",
-		dependencies = {
-			--- Uncomment these if you want to manage LSP servers from neovim
-			-- {'williamboman/mason.nvim'},
-			-- {'williamboman/mason-lspconfig.nvim'},
-
-			-- LSP Support
-			{ "neovim/nvim-lspconfig" },
-			-- Autocompletion
-			{ "hrsh7th/nvim-cmp" },
-			{ "hrsh7th/cmp-nvim-lsp" },
-			{ "L3MON4D3/LuaSnip" },
-		},
-	},
     -- Mason
     {
         "williamboman/mason.nvim",

@@ -1,54 +1,58 @@
-local lsp = require("lsp-zero")
 local lspconfig = require("lspconfig")
 
 local cmp = require("cmp")
-local cmp_action = require("lsp-zero").cmp_action()
-
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
+
+local luasnip = require("luasnip")
+
 cmp.setup({
-	window = {
-		completion = cmp.config.window.bordered(),
-		documentation = cmp.config.window.bordered(),
-	},
-	mapping = cmp.mapping.preset.insert({
-		["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
-		["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-		["<Enter>"] = cmp.mapping.confirm({ select = true }),
-		["<C-Space>"] = cmp.mapping.complete(),
-		["<Tab>"] = nil,
-		["<S-Tab>"] = nil,
-	}),
+  sources = {
+    { name = "nvim_lsp" },
+  },
+  window = {
+    completion = cmp.config.window.bordered(),
+	documentation = cmp.config.window.bordered(),
+  },
+  mapping = cmp.mapping.preset.insert({
+	["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
+	["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
+	["<Enter>"] = cmp.mapping.confirm({ select = true }),
+	["<C-Space>"] = cmp.mapping.complete(),
+	["<Tab>"] = nil,
+	["<S-Tab>"] = nil,
+  }),
+  snippet = {
+    expand = function(args)
+      luasnip.lsp_expand(args.body)
+    end
+  },
 })
 
 local conform = require("conform")
 
-lsp.on_attach(function(client, bufnr)
-	-- see :help lsp-zero-keybindings
-	-- to learn the available actions
-	lsp.default_keymaps({ buffer = bufnr })
+vim.api.nvim_create_autocmd("LspAttach", {
+  desc = "LSP actions",
+  callback = function(event)
+    local bufnr = event.buf
+    local opts = {buffer = event.buf}
 
-	local opts = { buffer = bufnr, remap = false }
+    -- these will be buffer-local keybindings
+    -- because they only work if you have an active language server
 
-	vim.keymap.set("n", "gd", function()
-		vim.lsp.buf.definition()
-	end, opts)
-	vim.keymap.set("n", "<leader>f", function()
-		conform.format({ bufnr = bufnr })
-	end, opts)
-	vim.keymap.set("n", "<leader><F2>", function()
-		vim.lsp.buf.rename()
-	end, opts)
-	vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, bufopts)
-
-	-- Set up autoformatting
-	vim.api.nvim_create_autocmd("BufWritePre", {
-		pattern = "*",
-		callback = function(args)
-			-- conform.format({ bufnr = args.buf })
-			-- vim.lsp.buf.format()
-		end,
-	})
-end)
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+    vim.keymap.set("n", "go", vim.lsp.buf.type_definition, opts)
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+    vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, opts)
+    vim.keymap.set("n", "<leader><F2>", vim.lsp.buf.rename, opts)
+    vim.keymap.set("n", "<leader>f", function()
+        conform.format({ bufnr = bufnr })
+    end, opts)
+    vim.keymap.set("n", "<F4>", vim.lsp.buf.code_action, opts)
+  end
+})
 
 lspconfig.opts = {
 	inlay_hints = {
@@ -321,3 +325,9 @@ lspconfig.sqls.setup({
     },
   },
 })
+
+--
+-- Lua
+--
+
+lspconfig.lua_ls.setup({})
