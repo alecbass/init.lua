@@ -62,7 +62,10 @@ local plugins = {
     },
 
     -- Used for LSP completion windows
-    { "hrsh7th/nvim-cmp" },
+    {
+      "hrsh7th/nvim-cmp",
+      dependencies = "hrsh7th/cmp-nvim-lsp",
+    },
     { "hrsh7th/cmp-nvim-lsp" },
 
 	-- Copilot
@@ -435,7 +438,10 @@ local plugins = {
         -- follow latest release.
         version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
         -- install jsregexp (optional!).
-        build = "make install_jsregexp"
+        build = "make install_jsregexp",
+        dependencies = {
+            "rafamadriz/friendly-snippets",
+        },
     },
 }
 

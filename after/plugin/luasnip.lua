@@ -29,10 +29,10 @@ function get_file_name()
     local name = string.gmatch(file_name, "[^%s$].+[\\.]")
 
     local name_without_extension = ""
-    for t in name do
+    for name_section in name do
         -- Cut off the trailing dot
-        local length = string.len(t)
-        name_without_extension = string.sub(t, 1, length - 1)
+        local length = string.len(name_section)
+        name_without_extension = string.sub(name_section, 1, length - 1)
 
         break
     end
@@ -41,7 +41,7 @@ function get_file_name()
 end
 
 -- Transforms "cool-component" into "CoolComponent"
-function create_class_name(file_name) 
+function create_class_name(file_name)
     -- Capitalised class name
     local class_name = ""
 
@@ -49,17 +49,17 @@ function create_class_name(file_name)
     local should_capitalise_next_char = true
 
     -- Iterate character-by-character, ignoring dashes and capitalising the next character when we see one
-    for i = 1, #file_name do
-        local c = file_name:sub(i, i)
-        local should_skip = c == "-"
+    for index = 1, #file_name do
+        local char = file_name:sub(index, index)
+        local should_skip = char == "-"
 
         if should_capitalise_next_char then
-            c = c:upper()
+            char = char:upper()
             should_capitalise_next_char = false
         end
 
         if should_skip == false then
-            class_name = class_name .. c
+            class_name = class_name .. char
         else
             -- No continue statement in lua :(
             should_capitalise_next_char = true
@@ -85,7 +85,7 @@ function insert_tag_name(args, snip, old_state, user_args)
   return sn(nil, t(file_name))
 end
 
-luasnip.add_snippets("typescript", {
+luasnip.add_snippets("lua", {
 	s("web",
         -- equivalent to "${1:cond} ? ${2:then} : ${3:else}"
         -- i(1, "cond"), t(" ? "), i(2, "then"), t(" : "), i(3, "else")
@@ -160,11 +160,14 @@ luasnip.add_snippets("typescript", {
 		})
 	),
 }, {
-	key = "typescript",
+	key = "lua",
 })
 
 luasnip.filetype_extend("all", { "_" })
 luasnip.filetype_extend("lua", { "c", "ts" })
 
+require("luasnip.loaders.from_vscode").lazy_load()
+
 require("luasnip.loaders.from_lua").lazy_load({ include = { "all", "c", "lua" } })
 require("luasnip.loaders.from_lua").lazy_load({ include = { "cpp" } })
+
