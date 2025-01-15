@@ -2,8 +2,11 @@ local lspconfig = require("lspconfig")
 
 local cmp = require("cmp")
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 local luasnip = require("luasnip")
+
+local conform = require("conform")
 
 cmp.setup({
   sources = {
@@ -27,8 +30,6 @@ cmp.setup({
     end
   },
 })
-
-local conform = require("conform")
 
 vim.api.nvim_create_autocmd("LspAttach", {
   desc = "LSP actions",
@@ -64,35 +65,39 @@ lspconfig.opts = {
 -- Replace these language servers
 -- with the ones you have installed in your system
 ---
-lspconfig.eslint.setup({})
+lspconfig.eslint.setup({
+  capabilities = capabilities,
+})
 -- Python
 
 -- https://github.com/microsoft/pyright/blob/main/docs/configuration.md
 lspconfig.pyright.setup({
-	settings = {
-		python = {
-			analysis = {
-				reportWildcardImportFromLibrary = "none",
-				reportUnknownMemberType = "none",
-			},
-		},
+  capabilities = capabilities,
+  settings = {
+    python = {
+	  analysis = {
+		reportWildcardImportFromLibrary = "none",
+		reportUnknownMemberType = "none",
+	  },
 	},
+  },
 })
 
 lspconfig.ruff.setup({
-	on_attach = function(client, bufnr)
-		client.server_capabilities.hoverProvider = false
-	end,
-	init_options = {
-		settings = {
-			-- Any extra CLI arguments for `ruff` go here.
-			args = {
-				"--line-length=120",
-			},
-			organizeImports = false,
-			["lint.run"] = "onSave",
-		},
+  capabilities = capabilities,
+  on_attach = function(client, bufnr)
+    client.server_capabilities.hoverProvider = false
+  end,
+  init_options = {
+    settings = {
+      -- Any extra CLI arguments for `ruff` go here.
+      args = {
+        "--line-length=120",
+      },
+      organizeImports = false,
+      ["lint.run"] = "onSave",
 	},
+  },
 })
 
 --lsp.format_on_save({
@@ -111,41 +116,44 @@ lspconfig.ruff.setup({
 --
 --
 
--- lspconfig.configs.vtsls = require("vtsls").lspconfig
-
 lspconfig.vtsls.setup({
-	settings = {
-		typescript = {
-			inlayHints = {
-				parameterNames = { enabled = "literals" },
-				parameterTypes = { enabled = true },
-				variableTypes = { enabled = true },
-				propertyDeclarationTypes = { enabled = true },
-				functionLikeReturnTypes = { enabled = true },
-				enumMemberValues = { enabled = true },
-			},
-		},
+  capabilities = capabilities,
+  settings = {
+	typescript = {
+	  inlayHints = {
+		parameterNames = { enabled = "literals" },
+        parameterTypes = { enabled = true },
+		variableTypes = { enabled = true },
+		propertyDeclarationTypes = { enabled = true },
+		functionLikeReturnTypes = { enabled = true },
+		enumMemberValues = { enabled = true },
+	  },
 	},
+  },
 })
 
 --
 -- Rust
 --
 
-lspconfig.rust_analyzer.setup({})
+lspconfig.rust_analyzer.setup({
+  capabilities = capabilities,
+})
 
 --
 -- Go
 --
 
-lspconfig.gopls.setup({})
+lspconfig.gopls.setup({
+  capabilities = capabilities,
+})
 
 vim.filetype.add({ extension = { templ = "templ" } })
 
-local lspconfig = require("lspconfig")
-
 lspconfig.templ.setup({
-    on_attach = on_attach
+  on_attach = function(client, bufnr)
+    -- Do nothing for now 
+  end,
 })
 
 --
@@ -219,18 +227,22 @@ lspconfig.diagnosticls.setup({
 --
 -- Bash
 --
-lspconfig.bashls.setup({})
+lspconfig.bashls.setup({
+  capabilities = capabilities,
+})
 
 --
 -- Django
 --
 
-lspconfig.djlsp.setup({})
+lspconfig.djlsp.setup({
+  capabilities = capabilities,
+})
 
 --
 -- HTML
 --
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 lspconfig.html.setup({
@@ -260,7 +272,9 @@ lspconfig.jsonls.setup({
 -- HTMX
 --
 
-lspconfig.htmx.setup({})
+lspconfig.htmx.setup({
+    capabilities = capabilities,
+})
 
 
 --
@@ -303,13 +317,16 @@ lspconfig.sourcekit.setup({
     },
 })
 
-lspconfig.clangd.setup({})
+lspconfig.clangd.setup({
+  capabilities = capabilities,
+})
 
 --
 -- SQL
 --
 
 lspconfig.sqls.setup({
+  capabilities = capabilities,
   on_attach = function(client, bufnr)
     require("sqls").on_attach(client, bufnr) -- require sqls.nvim
   end,
@@ -330,4 +347,7 @@ lspconfig.sqls.setup({
 -- Lua
 --
 
-lspconfig.lua_ls.setup({})
+lspconfig.lua_ls.setup({
+  capabilities = capabilities,
+})
+

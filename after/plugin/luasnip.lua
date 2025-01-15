@@ -13,12 +13,113 @@ local fmt = require("luasnip.extras.fmt").fmt
 
 luasnip.setup({})
 
-luasnip.add_snippets("lua", {
-	-- Very long example for a java class.
-	s("web", {
+-- Gets the current file name, without its extension
+function get_file_name()
+    -- The path to this file from the nvim config root
+    local path = string.gsub(vim.api.nvim_buf_get_name(0), vim.loop.cwd(), '')
+
+    local file_name = ""
+    -- Iterate over every directory until we get to the last element: the file name
+    -- i.e. /after/plugin/luasnip.lua -> { "after", "plugin", "luasnip.lua" }
+    for token, _ in string.gmatch(path, "[^/%s]+") do
+       file_name = token
+    end
+
+    -- i.e. luasnip.
+    local name = string.gmatch(file_name, "[^%s$].+[\\.]")
+
+    local name_without_extension = ""
+    for t in name do
+        -- Cut off the trailing dot
+        local length = string.len(t)
+        name_without_extension = string.sub(t, 1, length - 1)
+
+        break
+    end
+
+    return name_without_extension
+end
+
+-- Transforms "cool-component" into "CoolComponent"
+function create_class_name(file_name) 
+    -- Capitalised class name
+    local class_name = ""
+
+    -- Used to know if we reach a '-' OR at the first character, which should be capitalised
+    local should_capitalise_next_char = true
+
+    -- Iterate character-by-character, ignoring dashes and capitalising the next character when we see one
+    for i = 1, #file_name do
+        local c = file_name:sub(i, i)
+        local should_skip = c == "-"
+
+        if should_capitalise_next_char then
+            c = c:upper()
+            should_capitalise_next_char = false
+        end
+
+        if should_skip == false then
+            class_name = class_name .. c
+        else
+            -- No continue statement in lua :(
+            should_capitalise_next_char = true
+        end
+    end
+
+    return class_name
+end
+
+function insert_class_name(args, snip, old_state, user_args)
+  -- Transform the file name into both a class name, and a tag name
+  -- cool-component.ts -> CoolComponent
+  local file_name = get_file_name()
+  local class_name = create_class_name(file_name)
+
+  return sn(nil, t(class_name))
+end
+
+function insert_tag_name(args, snip, old_state, user_args)
+  -- Just use the file name
+  local file_name = get_file_name()
+
+  return sn(nil, t(file_name))
+end
+
+luasnip.add_snippets("typescript", {
+	s("web",
         -- equivalent to "${1:cond} ? ${2:then} : ${3:else}"
-        i(1, "cond"), t(" ? "), i(2, "then"), t(" : "), i(3, "else")
-	}),
+        -- i(1, "cond"), t(" ? "), i(2, "then"), t(" : "), i(3, "else")
+        fmt(
+            [[
+              export class {} extends HTMLElement {{
+                static observedAttributes = [];
+
+                connectedCallback() {{}}
+
+                disconnectedCallback() {{}}
+
+                attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null) {{}}
+              }}
+
+              customElements.define("{}", {});
+
+              declare global {{
+                interface HTMLElementTagNameMap {{
+                  "{}": {};
+                }}
+              }}
+
+            ]]
+        , {
+          -- It would be nice to use named keys here, but we get a weird position_so_far not found error when re-using
+          -- the same formatting key
+          d(1, insert_class_name, {}, {}),
+          d(2, insert_tag_name, {}, {}),
+          d(3, insert_class_name, {}, {}),
+          d(4, insert_tag_name, {}, {}),
+          d(5, insert_class_name, {}, {}),
+        })
+    ),
     s("class", {
 		-- Choice: Switch between two different Nodes, first parameter is its position, second a list of nodes.
 		c(1, {
@@ -59,11 +160,11 @@ luasnip.add_snippets("lua", {
 		})
 	),
 }, {
-	key = "lua",
+	key = "typescript",
 })
 
 luasnip.filetype_extend("all", { "_" })
 luasnip.filetype_extend("lua", { "c", "ts" })
 
-require("luasnip.loaders.from_lua").load({ include = { "all", "c", "lua" } })
+require("luasnip.loaders.from_lua").lazy_load({ include = { "all", "c", "lua" } })
 require("luasnip.loaders.from_lua").lazy_load({ include = { "cpp" } })
