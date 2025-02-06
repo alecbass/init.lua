@@ -85,7 +85,7 @@ function insert_tag_name(args, snip, old_state, user_args)
   return sn(nil, t(file_name))
 end
 
-luasnip.add_snippets("lua", {
+luasnip.add_snippets("typescript", {
 	s("web",
         -- equivalent to "${1:cond} ? ${2:then} : ${3:else}"
         -- i(1, "cond"), t(" ? "), i(2, "then"), t(" : "), i(3, "else")
@@ -164,10 +164,10 @@ luasnip.add_snippets("lua", {
 })
 
 luasnip.filetype_extend("all", { "_" })
-luasnip.filetype_extend("lua", { "c", "ts" })
+luasnip.filetype_extend("lua", { "c", "typescript" })
 
 require("luasnip.loaders.from_vscode").lazy_load()
 
-require("luasnip.loaders.from_lua").lazy_load({ include = { "all", "c", "lua" } })
+require("luasnip.loaders.from_lua").lazy_load({ include = { "all", "c", "lua", "typescript" } })
 require("luasnip.loaders.from_lua").lazy_load({ include = { "cpp" } })
 
