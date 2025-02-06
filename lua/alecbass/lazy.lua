@@ -56,11 +56,6 @@ local plugins = {
 		end,
 	},
 
-    -- Mason
-    {
-        "williamboman/mason.nvim",
-    },
-
     -- Used for LSP completion windows
     {
       "hrsh7th/nvim-cmp",
