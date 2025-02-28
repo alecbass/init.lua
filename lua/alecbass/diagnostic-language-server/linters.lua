@@ -31,33 +31,6 @@ local linters = {
     },
   },
 
-  eslint = {
-    command = "./node_modules/.bin/eslint",
-    args = { "--stdin", "--stdin-filename", "%filepath", "--format", "json" },
-    rootPatterns = {
-      ".eslintrc.js",
-      ".eslintrc.cjs",
-      ".eslintrc.yaml",
-      ".eslintrc.yml",
-      ".eslintrc.json",
-      "package.json",
-    },
-    debounce = 100,
-    sourceName = "eslint",
-    parseJson = {
-      errorsRoot = "[0].messages",
-      line = "line",
-      column = "column",
-      endLine = "endLine",
-      endColumn = "endColumn",
-      message = "${message} [${ruleId}]",
-      security = "severity",
-    },
-    securities = {
-      ["2"] = "error",
-      ["1"] = "warning",
-    },
-  },
   flake8 = {
     command = "flake8",
     args = { "--format=%(row)d,%(col)d,%(code).1s,%(code)s: %(text)s", "--config=max-line-length=120", "-" },

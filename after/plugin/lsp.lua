@@ -66,9 +66,10 @@ lspconfig.opts = {
 -- Replace these language servers
 -- with the ones you have installed in your system
 ---
-lspconfig.eslint.setup({
-  capabilities = capabilities,
-})
+-- lspconfig.eslint.setup({
+--   capabilities = capabilities,
+-- })
+
 -- Python
 
 -- https://github.com/microsoft/pyright/blob/main/docs/configuration.md
@@ -218,8 +219,7 @@ lspconfig.diagnosticls.setup({
 			["*"] = { "ligma" },
 			["javascript"] = "eslint",
 			["javascriptreact"] = "eslint",
-			["typescript"] = "eslint",
-			["typescriptreact"] = "eslint",
+            -- Don't use "typescript" or "typescript" as weird local babel configurations mess it up
 			["lua"] = "luacheck",
 		},
 	},
