@@ -256,11 +256,6 @@ lspconfig.cssls.setup({
     capabilities = capabilities,
 })
 
--- JSON
-lspconfig.jsonls.setup({
-	capabilities = capabilities,
-})
-
 --
 -- HTMX
 --
@@ -269,6 +264,10 @@ lspconfig.htmx.setup({
     capabilities = capabilities,
 })
 
+-- JSON
+lspconfig.jsonls.setup({
+	capabilities = capabilities,
+})
 
 --
 -- Docker Compose
