@@ -251,14 +251,6 @@ lspconfig.html.setup({
 })
 
 -- Styling (CSS/SCSS)
--- lspconfig.stylelint_lsp.setup({
---     cmd = { "stylelint-lsp", "--stdio" },
--- 	settings = {
--- 		stylelintplus = {
--- 			-- see available options in stylelint-lsp documentation
--- 		},
--- 	},
--- })
 
 lspconfig.cssls.setup({
     capabilities = capabilities,
