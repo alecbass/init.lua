@@ -343,3 +343,8 @@ lspconfig.lua_ls.setup({
   capabilities = capabilities,
 })
 
+--
+-- Cypher (neo4j)
+--
+
+lspconfig.cypher_ls.setup({})
