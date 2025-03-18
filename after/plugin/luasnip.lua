@@ -135,6 +135,14 @@ luasnip.add_snippets("typescript", {
                 @property()
                 value = "placeholder";
 
+                connectedCallback() {{
+                  super.connectedCallback();
+                }}
+
+                disconnectedCallback() {{
+                  super.disconnectedCallback();
+                }}
+
                 render() {{
                   return html`
                   `;
