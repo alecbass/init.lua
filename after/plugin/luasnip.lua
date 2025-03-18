@@ -73,7 +73,7 @@ function insert_class_name(args, snip, old_state, user_args)
   -- Transform the file name into both a class name, and a tag name
   -- cool-component.ts -> CoolComponent
   local file_name = get_file_name()
-  local class_name = create_class_name(file_name)
+  local class_name = create_class_name(file_name) .. "Element"
 
   return sn(nil, t(class_name))
 end
@@ -118,6 +118,43 @@ luasnip.add_snippets("typescript", {
           d(3, insert_class_name, {}, {}),
           d(4, insert_tag_name, {}, {}),
           d(5, insert_class_name, {}, {}),
+        })
+    ),
+	s("lit",
+        -- equivalent to "${1:cond} ? ${2:then} : ${3:else}"
+        -- i(1, "cond"), t(" ? "), i(2, "then"), t(" : "), i(3, "else")
+        fmt(
+            [[
+              import {{ html, css, LitElement }} from "lit";
+              import {{ customElement, property }} from "lit/decorators.js";
+
+              @customElement("{}")
+              export class {} extends LitElement {{
+                static styles = css``;
+
+                @property()
+                value = "placeholder";
+
+                render() {{
+                  return html`
+                  `;
+                }}
+              }}
+
+              declare global {{
+                interface HTMLElementTagNameMap {{
+                  "{}": {};
+                }}
+              }}
+
+            ]]
+        , {
+          -- It would be nice to use named keys here, but we get a weird position_so_far not found error when re-using
+          -- the same formatting key
+          d(1, insert_tag_name, {}, {}),
+          d(2, insert_class_name, {}, {}),
+          d(3, insert_tag_name, {}, {}),
+          d(4, insert_class_name, {}, {}),
         })
     ),
     s("class", {
