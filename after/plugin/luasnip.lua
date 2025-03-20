@@ -80,7 +80,7 @@ end
 
 function insert_tag_name(args, snip, old_state, user_args)
   -- Just use the file name
-  local file_name = get_file_name()
+  local file_name = get_file_name() .. "-element"
 
   return sn(nil, t(file_name))
 end
