@@ -139,6 +139,7 @@ lspconfig.vtsls.setup({
 --
 
 lspconfig.rust_analyzer.setup({
+  capabilities = capabilities, -- Required for make import suggestions appear
   settings = {
     ['rust-analyzer'] = {
       diagnostics = {
