@@ -324,22 +324,26 @@ lspconfig.clangd.setup({
 -- SQL
 --
 
-lspconfig.sqls.setup({
+-- lspconfig.sqls.setup({
+--   capabilities = capabilities,
+--   on_attach = function(client, bufnr)
+--     require("sqls").on_attach(client, bufnr) -- require sqls.nvim
+--   end,
+--   settings = {
+--     sqls = {
+--       connections = {
+--         {
+--           driver = "postgresql",
+--           -- DropSpot specific
+--           dataSourceName = "host=127.0.0.1 port=5432 user=dropspot password=dropspot dbname=dropspot sslmode=disable",
+--         },
+--       },
+--     },
+--   },
+-- })
+
+lspconfig.postgres_lsp.setup({
   capabilities = capabilities,
-  on_attach = function(client, bufnr)
-    require("sqls").on_attach(client, bufnr) -- require sqls.nvim
-  end,
-  settings = {
-    sqls = {
-      connections = {
-        {
-          driver = "postgresql",
-          -- DropSpot specific
-          dataSourceName = "host=127.0.0.1 port=5432 user=dropspot password=dropspot dbname=dropspot sslmode=disable",
-        },
-      },
-    },
-  },
 })
 
 --
