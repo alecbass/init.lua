@@ -255,6 +255,10 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 lspconfig.html.setup({
 	capabilities = capabilities,
+    settings = {
+      filetypes = { "html", "templ", "razor", "aspnetcorerazor" },
+    },
+    filetypes = { "html", "templ", "razor", "aspnetcorerazor" },
 })
 
 -- Styling (CSS/SCSS)
@@ -359,3 +363,53 @@ lspconfig.lua_ls.setup({
 --
 
 lspconfig.cypher_ls.setup({})
+
+--
+-- Dotnet (C#)
+--
+lspconfig.csharp_ls.setup({
+  capabilities = capabilities,
+  filetypes = { "cs", "aspnetrazor" },
+  settings = {
+    filetypes = { "cs", "aspnetrazor" },
+  },
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "*.cshtml", "*.razor", "*.lua" },
+  callback = function()
+    vim.cmd("set filetype=html.cshtml.razor")
+    -- vim.schedule(function ()
+    --   print("yooo")
+    -- end)
+  end,
+  -- group = "lu"
+})
+
+
+-- autocmd BufNewFile,BufRead *.cshtml set filetype=html.cshtml.razor
+-- autocmd BufNewFile,BufRead *.razor set filetype=html.cshtml.razor
+
+-- vim.api.nvim_create_autocmd("LspAttach", {
+--   desc = "LSP actions",
+--   callback = function(event)
+--     local bufnr = event.buf
+--     local opts = {buffer = event.buf}
+--
+--     -- these will be buffer-local keybindings
+--     -- because they only work if you have an active language server
+--
+--     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+--     vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+--     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+--     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+--     vim.keymap.set("n", "go", vim.lsp.buf.type_definition, opts)
+--     vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+--     vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, opts)
+--     vim.keymap.set("n", "<leader><F2>", vim.lsp.buf.rename, opts)
+--     vim.keymap.set("n", "<leader>f", function()
+--         conform.format({ bufnr = bufnr })
+--     end, opts)
+--     vim.keymap.set("n", "<F4>", vim.lsp.buf.code_action, opts)
+--   end
+-- })
