@@ -442,44 +442,55 @@ local plugins = {
         "seblyng/roslyn.nvim",
         ft = { "razor" }, -- Remove "cs" as csharp_ls covers it already
         dependencies = {
-            {
-                -- By loading as a dependencies, we ensure that we are available to set
-                -- the handlers for Roslyn.
-                "tris203/rzls.nvim",
-                config = true,
-            },
+            "tris203/rzls.nvim",
         },
         opts = {
             -- your configuration comes here; leave empty for default settings
             -- NOTE: You must configure `cmd` in `config.cmd` unless you have installed via mason
         },
-        ---@module 'roslyn.config'
-        ---@type RoslynNvimConfig
-        config = function()
+        config = function ()
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
             -- Adjust these paths to where you installed Roslyn and rzls.
+            ---@type string
             local roslyn_base_path = vim.fs.joinpath(vim.fn.stdpath("data"), "roslyn")
-            local rzls_base_path = vim.fs.joinpath(vim.fn.stdpath("data"), "rzls")
+
+            -- Should be supplied by the Nix flake requiring rzls
+            ---@type string?
+            local rzls_base_path = os.getenv("RZLS_BASE_PATH")
+
+            if rzls_base_path == nil then
+                print("RZLS_BASE_PATH is not set, cannot run Razor LSP")
+                return
+            end
+
+            local rzls_lib_path = vim.fs.joinpath(rzls_base_path, "lib/rzls")
+            local rzls_bin_path = vim.fs.joinpath(rzls_base_path, "bin/rzls")
+
+            -- require("rzls").setup({
+            --     path = rzls_bin_path,
+            --     capabilities = capabilities,
+            -- })
 
             ---@type string[]
             local cmd = {
                 "dotnet",
-                vim.fs.joinpath(roslyn_base_path, "Microsoft.CodeAnalysis.LanguageServer.dll"),
+                "Microsoft.CodeAnalysis.LanguageServer",
                 "--stdio",
                 "--logLevel=Information",
                 "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
-                "--razorSourceGenerator=" .. vim.fs.joinpath(rzls_base_path, "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
+                "--razorSourceGenerator=" .. vim.fs.joinpath(rzls_lib_path, "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
                 "--razorDesignTimePath="
                     .. vim.fs.joinpath(rzls_base_path, "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
             }
 
-            require("roslyn").setup {
+            require("roslyn").setup({
                 cmd = cmd,
                 handlers = require("rzls.roslyn_handlers"),
                 settings = {
                     ["csharp|inlay_hints"] = {
                         csharp_enable_inlay_hints_for_implicit_object_creation = true,
                         csharp_enable_inlay_hints_for_implicit_variable_types = true,
-
                         csharp_enable_inlay_hints_for_lambda_parameter_types = true,
                         csharp_enable_inlay_hints_for_types = true,
                         dotnet_enable_inlay_hints_for_indexer_parameters = true,
@@ -495,7 +506,7 @@ local plugins = {
                         dotnet_enable_references_code_lens = true,
                     },
                 },
-            }
+            })
         end,
         init = function()
             -- We add the Razor file types before the plugin loads.

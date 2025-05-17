@@ -369,14 +369,14 @@ lspconfig.cypher_ls.setup({})
 --
 lspconfig.csharp_ls.setup({
   capabilities = capabilities,
-  filetypes = { "cs", "aspnetrazor" },
+  filetypes = { "cs", "razor" },
   settings = {
-    filetypes = { "cs", "aspnetrazor" },
+    filetypes = { "cs", "razor" },
   },
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "*.cshtml", "*.razor", "*.lua" },
+  pattern = { "*.cshtml", "*.razor" },
   callback = function()
     vim.cmd("set filetype=html.cshtml.razor")
     -- vim.schedule(function ()
