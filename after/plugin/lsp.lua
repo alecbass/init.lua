@@ -73,7 +73,7 @@ lspconfig.opts = {
 -- Python
 
 -- https://github.com/microsoft/pyright/blob/main/docs/configuration.md
-lspconfig.pyright.setup({
+vim.lsp.config("pyright", {
   capabilities = capabilities,
   settings = {
     python = {
@@ -84,8 +84,9 @@ lspconfig.pyright.setup({
 	},
   },
 })
+vim.lsp.enable("pyright")
 
-lspconfig.ruff.setup({
+vim.lsp.config("ruff", {
   capabilities = capabilities,
   on_attach = function(client, bufnr)
     client.server_capabilities.hoverProvider = false
@@ -98,9 +99,10 @@ lspconfig.ruff.setup({
       },
       organizeImports = false,
       ["lint.run"] = "onSave",
-	},
-  },
+    }
+  }
 })
+vim.lsp.enable("ruff")
 
 --lsp.format_on_save({
 --  format_opts = {
