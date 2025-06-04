@@ -389,8 +389,38 @@ vim.lsp.enable("cypher_ls")
 --
 
 -- C# and Razor
-vim.lsp.config("roslyn_ls", {
-    filetypes = { "cs", "dotnetrazor", "razor" },
+-- Should be supplied by the Nix flake requiring rzls
+---@type string?
+local rzls_base_path = os.getenv("RZLS_BASE_PATH")
+
+if rzls_base_path == nil then
+    -- RZLS_BASE_PATH is not set, cannot run Razor LSP
+    rzls_base_path = "./"
+end
+
+-- Add the Razor flags
+local cmd = {
+  "Microsoft.CodeAnalysis.LanguageServer",
+  "--stdio",
+  "--logLevel=Information",
+  "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
+  "--razorSourceGenerator=" .. vim.fs.joinpath(rzls_base_path, "lib", "rzls", "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
+  "--razorDesignTimePath="
+    .. vim.fs.joinpath(rzls_base_path, "lib", "rzls", "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
+}
+
+vim.filetype.add({
+    extension = {
+        razor = "aspnetcorerazor",
+        cshtml = "aspnetcorerazor",
+    },
+    [".razor"] = "aspnetcorerazor",
+})
+
+vim.lsp.config("roslyn", {
+    cmd = cmd,
+    filetypes = { "cs", "aspnetcorerazor" },
+    handlers = require("rzls.roslyn_handlers"),
     settings = {
         ["csharp|inlay_hints"] = {
             csharp_enable_inlay_hints_for_implicit_object_creation = true,
@@ -411,32 +441,6 @@ vim.lsp.config("roslyn_ls", {
         },
     },
 })
-vim.lsp.enable("roslyn_ls")
+-- vim.lsp.enable("roslyn_ls")
+vim.lsp.enable("roslyn")
 
-
--- autocmd BufNewFile,BufRead *.cshtml set filetype=html.cshtml.razor
--- autocmd BufNewFile,BufRead *.razor set filetype=html.cshtml.razor
-
--- vim.api.nvim_create_autocmd("LspAttach", {
---   desc = "LSP actions",
---   callback = function(event)
---     local bufnr = event.buf
---     local opts = {buffer = event.buf}
---
---     -- these will be buffer-local keybindings
---     -- because they only work if you have an active language server
---
---     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
---     vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
---     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
---     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
---     vim.keymap.set("n", "go", vim.lsp.buf.type_definition, opts)
---     vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
---     vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, opts)
---     vim.keymap.set("n", "<leader><F2>", vim.lsp.buf.rename, opts)
---     vim.keymap.set("n", "<leader>f", function()
---         conform.format({ bufnr = bufnr })
---     end, opts)
---     vim.keymap.set("n", "<F4>", vim.lsp.buf.code_action, opts)
---   end
--- })

@@ -20,7 +20,7 @@ local lazy = require("lazy")
 local plugins = {
 	{
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.6",
+		version = "0.1.8",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"hrsh7th/nvim-cmp",
@@ -28,7 +28,7 @@ local plugins = {
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
-        version = "v0.9.3",
+        version = "v0.10.0",
 		config = function()
 			vim.cmd(":TSUpdate")
 		end,
@@ -438,101 +438,17 @@ local plugins = {
     },
 
     -- Roslyn, for Blazor support
+    { "tris203/rzls.nvim" },
     {
         "seblyng/roslyn.nvim",
-        ft = { "cs", "aspsnetcorerazor" },
+        ft = { "cs", "aspnetcorerazor" },
         ---@module 'roslyn.config'
         ---@type RoslynNvimConfig
         opts = {
             -- your configuration comes here; leave empty for default settings
         },
+        dependencies = { "tris203/rzls.nvim", config = true }
     },
-
-    -- {
-    --     "seblyng/roslyn.nvim",
-    --     ft = { "razor", "aspnetcorerazor" }, -- Remove "cs" as csharp_ls covers it already
-    --     dependencies = {
-    --         "tris203/rzls.nvim",
-    --     },
-    --     opts = {
-    --         -- your configuration comes here; leave empty for default settings
-    --         -- NOTE: You must configure `cmd` in `config.cmd` unless you have installed via mason
-    --     },
-    --     config = function ()
-    --         local capabilities = require("cmp_nvim_lsp").default_capabilities()
-    --
-    --         -- Adjust these paths to where you installed Roslyn and rzls.
-    --         ---@type string
-    --         local roslyn_base_path = vim.fs.joinpath(vim.fn.stdpath("data"), "roslyn")
-    --
-    --         -- Should be supplied by the Nix flake requiring rzls
-    --         ---@type string?
-    --         local rzls_base_path = os.getenv("RZLS_BASE_PATH")
-    --
-    --         if rzls_base_path == nil then
-    --             print("RZLS_BASE_PATH is not set, cannot run Razor LSP")
-    --             return
-    --         end
-    --
-    --         local rzls_lib_path = vim.fs.joinpath(rzls_base_path, "lib/rzls")
-    --         local rzls_bin_path = vim.fs.joinpath(rzls_base_path, "bin/rzls")
-    --
-    --         ---@type string[]
-    --         local cmd = {
-    --             "dotnet",
-    --             "Microsoft.CodeAnalysis.LanguageServer",
-    --             "--stdio",
-    --             "--logLevel=Information",
-    --             "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
-    --             "--razorSourceGenerator=" .. vim.fs.joinpath(rzls_lib_path, "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
-    --             "--razorDesignTimePath="
-    --                 .. vim.fs.joinpath(rzls_base_path, "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
-    --         }
-    --
-    --         require("roslyn").setup({
-    --             cmd = cmd,
-    --             config = {
-    --                 -- the rest of your Roslyn configuration
-    --                 handlers = require("rzls.roslyn_handlers"),
-    --             },
-    --         })
-    --
-    --
-    --         vim.lsp.config("roslyn", {
-    --             cmd = cmd,
-    --             handlers = require("rzls.roslyn_handlers"),
-    --             settings = {
-    --                 ["csharp|inlay_hints"] = {
-    --                     csharp_enable_inlay_hints_for_implicit_object_creation = true,
-    --                     csharp_enable_inlay_hints_for_implicit_variable_types = true,
-    --                     csharp_enable_inlay_hints_for_lambda_parameter_types = true,
-    --                     csharp_enable_inlay_hints_for_types = true,
-    --                     dotnet_enable_inlay_hints_for_indexer_parameters = true,
-    --                     dotnet_enable_inlay_hints_for_literal_parameters = true,
-    --                     dotnet_enable_inlay_hints_for_object_creation_parameters = true,
-    --                     dotnet_enable_inlay_hints_for_other_parameters = true,
-    --                     dotnet_enable_inlay_hints_for_parameters = true,
-    --                     dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
-    --                     dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
-    --                     dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
-    --                 },
-    --                 ["csharp|code_lens"] = {
-    --                     dotnet_enable_references_code_lens = true,
-    --                 },
-    --             },
-    --         })
-    --         vim.lsp.enable("roslyn")
-    --     end,
-    --     init = function()
-    --         -- We add the Razor file types before the plugin loads.
-    --         vim.filetype.add({
-    --             extension = {
-    --                 razor = "razor",
-    --                 cshtml = "razor",
-    --             },
-    --         })
-    --     end,
-    -- },
 }
 
 lazy.setup(plugins, opts)
