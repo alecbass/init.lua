@@ -390,9 +390,7 @@ vim.lsp.enable("cypher_ls")
 
 -- C# and Razor
 vim.lsp.config("roslyn_ls", {
-    -- cmd = cmd,
-    -- handlers = require("rzls.roslyn_handlers"),
-    --
+    filetypes = { "cs", "dotnetrazor", "razor" },
     settings = {
         ["csharp|inlay_hints"] = {
             csharp_enable_inlay_hints_for_implicit_object_creation = true,
