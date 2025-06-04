@@ -39,7 +39,7 @@ local plugins = {
 	{ "tpope/vim-fugitive" },
 
     -- Lspconfig
-	{ "neovim/nvim-lspconfig" },
+	{ "neovim/nvim-lspconfig", version = "2.2.0" },
 
 	-- Debugging
 	{ "nvim-lua/plenary.nvim" },
@@ -438,9 +438,19 @@ local plugins = {
     },
 
     -- Roslyn, for Blazor support
+    {
+        "seblyng/roslyn.nvim",
+        ft = { "cs", "aspsnetcorerazor" },
+        ---@module 'roslyn.config'
+        ---@type RoslynNvimConfig
+        opts = {
+            -- your configuration comes here; leave empty for default settings
+        },
+    },
+
     -- {
     --     "seblyng/roslyn.nvim",
-    --     ft = { "razor" }, -- Remove "cs" as csharp_ls covers it already
+    --     ft = { "razor", "aspnetcorerazor" }, -- Remove "cs" as csharp_ls covers it already
     --     dependencies = {
     --         "tris203/rzls.nvim",
     --     },
@@ -467,11 +477,6 @@ local plugins = {
     --         local rzls_lib_path = vim.fs.joinpath(rzls_base_path, "lib/rzls")
     --         local rzls_bin_path = vim.fs.joinpath(rzls_base_path, "bin/rzls")
     --
-    --         -- require("rzls").setup({
-    --         --     path = rzls_bin_path,
-    --         --     capabilities = capabilities,
-    --         -- })
-    --
     --         ---@type string[]
     --         local cmd = {
     --             "dotnet",
@@ -485,6 +490,15 @@ local plugins = {
     --         }
     --
     --         require("roslyn").setup({
+    --             cmd = cmd,
+    --             config = {
+    --                 -- the rest of your Roslyn configuration
+    --                 handlers = require("rzls.roslyn_handlers"),
+    --             },
+    --         })
+    --
+    --
+    --         vim.lsp.config("roslyn", {
     --             cmd = cmd,
     --             handlers = require("rzls.roslyn_handlers"),
     --             settings = {
@@ -507,6 +521,7 @@ local plugins = {
     --                 },
     --             },
     --         })
+    --         vim.lsp.enable("roslyn")
     --     end,
     --     init = function()
     --         -- We add the Razor file types before the plugin loads.

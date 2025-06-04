@@ -120,7 +120,7 @@ vim.lsp.enable("ruff")
 --
 --
 
-lspconfig.vtsls.setup({
+vim.lsp.config("vtsls", {
   capabilities = capabilities,
   settings = {
 	typescript = {
@@ -135,12 +135,13 @@ lspconfig.vtsls.setup({
 	},
   },
 })
+vim.lsp.enable("vtsls")
 
 --
 -- Rust
 --
 
-lspconfig.rust_analyzer.setup({
+vim.lsp.config("rust_analyzer", {
   capabilities = capabilities, -- Required for make import suggestions appear
   settings = {
     ['rust-analyzer'] = {
@@ -150,22 +151,25 @@ lspconfig.rust_analyzer.setup({
     }
   }
 })
+vim.lsp.enable("rust_analyzer")
 
 --
 -- Go
 --
 
-lspconfig.gopls.setup({
+vim.lsp.config("gopls", {
   capabilities = capabilities,
 })
+vim.lsp.enable("gopls")
 
 vim.filetype.add({ extension = { templ = "templ" } })
 
-lspconfig.templ.setup({
+vim.lsp.config("templ", {
   on_attach = function(client, bufnr)
     -- Do nothing for now 
   end,
 })
+vim.lsp.enable("templ")
 
 --
 -- Diagnostic Language Server
@@ -175,7 +179,7 @@ local prettier = require("diagnosticls-configs.formatters.prettier")
 local black = require("diagnosticls-configs.formatters.black")
 local luacheck = require("diagnosticls-configs.linters.luacheck")
 
-lspconfig.diagnosticls.setup({
+vim.lsp.config("diagnosticls", {
 	filetypes = { "*" },
 	init_options = {
 		linters = {
@@ -233,21 +237,24 @@ lspconfig.diagnosticls.setup({
 		},
 	},
 })
+vim.lsp.enable("diagnosticls")
 
 --
 -- Bash
 --
-lspconfig.bashls.setup({
+vim.lsp.config("bashls", {
   capabilities = capabilities,
 })
+vim.lsp.enable("bashls")
 
 --
 -- Django
 --
 
-lspconfig.djlsp.setup({
+vim.lsp.config("djlsp", {
   capabilities = capabilities,
 })
+vim.lsp.enable("djlsp")
 
 --
 -- HTML
@@ -255,42 +262,47 @@ lspconfig.djlsp.setup({
 -- local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-lspconfig.html.setup({
+vim.lsp.config("html", {
 	capabilities = capabilities,
     settings = {
-      filetypes = { "html", "templ", "razor", "aspnetcorerazor" },
+      filetypes = { "html", "templ", "aspnetcorerazor" },
     },
-    filetypes = { "html", "templ", "razor", "aspnetcorerazor" },
+    filetypes = { "html", "templ", "aspnetcorerazor" },
 })
+vim.lsp.enable("html")
 
 -- Styling (CSS/SCSS)
 
-lspconfig.cssls.setup({
+vim.lsp.config("cssls", {
     capabilities = capabilities,
 })
+vim.lsp.enable("cssls")
 
 --
 -- HTMX
 --
 
-lspconfig.htmx.setup({
+vim.lsp.config("htmx", {
     capabilities = capabilities,
 })
+vim.lsp.enable("htmx")
 
 -- JSON
-lspconfig.jsonls.setup({
+vim.lsp.config("jsonls", {
 	capabilities = capabilities,
 })
+vim.lsp.enable("jsonls")
 
 --
 -- Docker Compose
 --
-lspconfig.docker_compose_language_service.setup({})
+vim.lsp.config("docker_compose_language_service", {})
+vim.lsp.enable("docker_compose_language_service")
 
 --
 -- Docker
 --
-lspconfig.dockerls.setup({
+vim.lsp.config("dockerls", {
     settings = {
         docker = {
             languageserver = {
@@ -301,11 +313,12 @@ lspconfig.dockerls.setup({
         }
     }
 })
+vim.lsp.enable("dockerls")
 
 --
 -- C/C++/Objective-C and Swift
 
-lspconfig.sourcekit.setup({
+vim.lsp.config("sourcekit", {
     -- filetypes = { 
     --     -- "swift", 
     --     "c", 
@@ -321,10 +334,12 @@ lspconfig.sourcekit.setup({
         },
     },
 })
+vim.lsp.enable("sourcekit")
 
-lspconfig.clangd.setup({
+vim.lsp.config("clangd", {
   capabilities = capabilities,
 })
+vim.lsp.enable("clangd")
 
 --
 -- SQL
@@ -348,45 +363,57 @@ lspconfig.clangd.setup({
 --   },
 -- })
 
-lspconfig.postgres_lsp.setup({
+vim.lsp.config("postgres_lsp", {
   capabilities = capabilities,
 })
+vim.lsp.enable("postgres_lsp")
 
 --
 -- Lua
 --
 
-lspconfig.lua_ls.setup({
+vim.lsp.config("lua_ls", {
   capabilities = capabilities,
 })
+vim.lsp.enable("lua_ls")
 
 --
 -- Cypher (neo4j)
 --
 
-lspconfig.cypher_ls.setup({})
+vim.lsp.config("cypher_ls", {})
+vim.lsp.enable("cypher_ls")
 
 --
 -- Dotnet (C#)
 --
-lspconfig.csharp_ls.setup({
-  capabilities = capabilities,
-  filetypes = { "cs", "razor" },
-  settings = {
-    filetypes = { "cs", "razor" },
-  },
-})
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "*.cshtml", "*.razor" },
-  callback = function()
-    vim.cmd("set filetype=html.cshtml.razor")
-    -- vim.schedule(function ()
-    --   print("yooo")
-    -- end)
-  end,
-  -- group = "lu"
+-- C# and Razor
+vim.lsp.config("roslyn_ls", {
+    -- cmd = cmd,
+    -- handlers = require("rzls.roslyn_handlers"),
+    --
+    settings = {
+        ["csharp|inlay_hints"] = {
+            csharp_enable_inlay_hints_for_implicit_object_creation = true,
+            csharp_enable_inlay_hints_for_implicit_variable_types = true,
+            csharp_enable_inlay_hints_for_lambda_parameter_types = true,
+            csharp_enable_inlay_hints_for_types = true,
+            dotnet_enable_inlay_hints_for_indexer_parameters = true,
+            dotnet_enable_inlay_hints_for_literal_parameters = true,
+            dotnet_enable_inlay_hints_for_object_creation_parameters = true,
+            dotnet_enable_inlay_hints_for_other_parameters = true,
+            dotnet_enable_inlay_hints_for_parameters = true,
+            dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
+            dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
+            dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
+        },
+        ["csharp|code_lens"] = {
+            dotnet_enable_references_code_lens = true,
+        },
+    },
 })
+vim.lsp.enable("roslyn_ls")
 
 
 -- autocmd BufNewFile,BufRead *.cshtml set filetype=html.cshtml.razor
