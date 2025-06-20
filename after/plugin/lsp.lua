@@ -284,6 +284,7 @@ vim.lsp.enable("cssls")
 
 vim.lsp.config("htmx", {
     capabilities = capabilities,
+    filetypes = { "html", "aspnetcorerazor" },
 })
 vim.lsp.enable("htmx")
 
@@ -415,6 +416,14 @@ vim.filetype.add({
         cshtml = "aspnetcorerazor",
     },
     [".razor"] = "aspnetcorerazor",
+})
+
+require("roslyn").setup({
+    cmd = cmd,
+    config = {
+        -- the rest of your Roslyn configuration
+        handlers = require("rzls.roslyn_handlers"),
+    },
 })
 
 vim.lsp.config("roslyn", {
