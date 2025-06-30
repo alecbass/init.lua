@@ -449,6 +449,15 @@ local plugins = {
         },
         dependencies = { "tris203/rzls.nvim", config = true }
     },
+
+    -- Supermaven autocomplete
+    {
+      "supermaven-inc/supermaven-nvim",
+      config = function()
+        local supermaven = require("supermaven-nvim")
+        supermaven.setup({})
+      end,
+    },
 }
 
 lazy.setup(plugins, opts)
