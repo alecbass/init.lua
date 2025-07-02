@@ -1,6 +1,6 @@
 local lspconfig = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
+local conform = require("conform")
 
 
 vim.api.nvim_create_autocmd("LspAttach", {
