@@ -1,6 +1,18 @@
 require("nvim-treesitter.configs").setup({
 	-- A list of parser names, or "all" (the five listed parsers should always be installed)
-	ensure_installed = { "lua", "vim", "vimdoc", "query", "javascript", "typescript", "c", "rust", "python", "tsx", "go" },
+	ensure_installed = {
+		"lua",
+		"vim",
+		"vimdoc",
+		"query",
+		"javascript",
+		"typescript",
+		"c",
+		"rust",
+		"python",
+		"tsx",
+		"go",
+	},
 
 	-- Install parsers synchronously (only applied to `ensure_installed`)
 	sync_install = false,
@@ -23,14 +35,14 @@ require("nvim-treesitter.configs").setup({
 		-- the name of the parser)
 		-- list of language that will be disabled
 
-        -- Editing HTML crashes for some strange reason
-        disable = function(lang, buf)
-            if lang == "html" then
-                return true
-            end
+		-- Editing HTML crashes for some strange reason
+		disable = function(lang, buf)
+			if lang == "html" then
+				return true
+			end
 
-            return false
-        end,
+			return false
+		end,
 
 		-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
 		-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).

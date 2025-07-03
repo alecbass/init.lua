@@ -13,9 +13,10 @@ local fmt = require("luasnip.extras.fmt").fmt
 local utils = require("snippets.utils")
 
 return {
-    s("web",
-        fmt(
-            [[
+	s(
+		"web",
+		fmt(
+			[[
               export class {} extends HTMLElement {{
                 static observedAttributes = [];
 
@@ -34,20 +35,22 @@ return {
                 }}
               }}
 
-            ]]
-        , {
-          -- It would be nice to use named keys here, but we get a weird position_so_far not found error when re-using
-          -- the same formatting key
-          d(1, utils.insert_class_name, {}, {}),
-          d(2, utils.insert_tag_name, {}, {}),
-          d(3, utils.insert_class_name, {}, {}),
-          d(4, utils.insert_tag_name, {}, {}),
-          d(5, utils.insert_class_name, {}, {}),
-        })
-    ),
-	s("lit",
-        fmt(
-            [[
+            ]],
+			{
+				-- It would be nice to use named keys here, but we get a weird position_so_far not found error when re-using
+				-- the same formatting key
+				d(1, utils.insert_class_name, {}, {}),
+				d(2, utils.insert_tag_name, {}, {}),
+				d(3, utils.insert_class_name, {}, {}),
+				d(4, utils.insert_tag_name, {}, {}),
+				d(5, utils.insert_class_name, {}, {}),
+			}
+		)
+	),
+	s(
+		"lit",
+		fmt(
+			[[
               import {{ html, css, LitElement }} from "lit";
               import {{ customElement, property }} from "lit/decorators.js";
 
@@ -78,17 +81,18 @@ return {
                 }}
               }}
 
-            ]]
-        , {
-          -- It would be nice to use named keys here, but we get a weird position_so_far not found error when re-using
-          -- the same formatting key
-          d(1, utils.insert_tag_name, {}, {}),
-          d(2, utils.insert_class_name, {}, {}),
-          d(3, utils.insert_tag_name, {}, {}),
-          d(4, utils.insert_class_name, {}, {}),
-        })
-    ),
-    s("class", {
+            ]],
+			{
+				-- It would be nice to use named keys here, but we get a weird position_so_far not found error when re-using
+				-- the same formatting key
+				d(1, utils.insert_tag_name, {}, {}),
+				d(2, utils.insert_class_name, {}, {}),
+				d(3, utils.insert_tag_name, {}, {}),
+				d(4, utils.insert_class_name, {}, {}),
+			}
+		)
+	),
+	s("class", {
 		-- Choice: Switch between two different Nodes, first parameter is its position, second a list of nodes.
 		c(1, {
 			t("public "),
@@ -119,7 +123,7 @@ return {
 		i(0),
 		t({ "", "}" }),
 	}),
-    s(
+	s(
 		"fmt1",
 		fmt("To {title} {} {}.", {
 			i(2, "Name"),

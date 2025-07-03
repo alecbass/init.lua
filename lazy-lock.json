@@ -22,7 +22,7 @@
   "nvim-window-picker": { "branch": "main", "commit": "6382540b2ae5de6c793d4aa2e3fe6dbb518505ec" },
   "plenary.nvim": { "branch": "master", "commit": "857c5ac632080dba10aae49dba902ce3abf91b35" },
   "rose-pine": { "branch": "main", "commit": "f93360149e9ed4df8677fbb07c7231ea0fd03b97" },
-  "roslyn.nvim": { "branch": "main", "commit": "6baa44274dabf237a0ebec94b4ccad0e3831ed12" },
+  "roslyn.nvim": { "branch": "main", "commit": "c1f51eb9535215df21d6cad2988cac3b9d263dad" },
   "rzls.nvim": { "branch": "main", "commit": "27b4c4c3bf35f3d83ccfba8c696c96f7e1d9c154" },
   "supermaven-nvim": { "branch": "main", "commit": "07d20fce48a5629686aefb0a7cd4b25e33947d50" },
   "tabby.nvim": { "branch": "main", "commit": "b3affa6db7eab80fca2a2db5b73b473144507039" },

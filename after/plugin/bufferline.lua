@@ -1,8 +1,7 @@
 local bufferline = require("bufferline")
 
 bufferline.setup({
-    options = {
-        mode = "buffers",
-    }
+	options = {
+		mode = "buffers",
+	},
 })
-

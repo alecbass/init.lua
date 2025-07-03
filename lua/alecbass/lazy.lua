@@ -1,17 +1,17 @@
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-  if vim.v.shell_error ~= 0 then
-    vim.api.nvim_echo({
-      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out, "WarningMsg" },
-      { "\nPress any key to exit..." },
-    }, true, {})
-    vim.fn.getchar()
-    os.exit(1)
-  end
+	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+	if vim.v.shell_error ~= 0 then
+		vim.api.nvim_echo({
+			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+			{ out, "WarningMsg" },
+			{ "\nPress any key to exit..." },
+		}, true, {})
+		vim.fn.getchar()
+		os.exit(1)
+	end
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -28,7 +28,7 @@ local plugins = {
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
-        version = "v0.10.0",
+		version = "v0.10.0",
 		config = function()
 			vim.cmd(":TSUpdate")
 		end,
@@ -38,7 +38,7 @@ local plugins = {
 	{ "mbbill/undotree" },
 	{ "tpope/vim-fugitive" },
 
-    -- Lspconfig
+	-- Lspconfig
 	{ "neovim/nvim-lspconfig", version = "2.2.0" },
 
 	-- Debugging
@@ -54,12 +54,12 @@ local plugins = {
 		end,
 	},
 
-    -- Used for LSP completion windows
-    {
-      "hrsh7th/nvim-cmp",
-      dependencies = "hrsh7th/cmp-nvim-lsp",
-    },
-    { "hrsh7th/cmp-nvim-lsp" },
+	-- Used for LSP completion windows
+	{
+		"hrsh7th/nvim-cmp",
+		dependencies = "hrsh7th/cmp-nvim-lsp",
+	},
+	{ "hrsh7th/cmp-nvim-lsp" },
 
 	-- Copilot
 	-- { "github/copilot.vim" },
@@ -408,56 +408,55 @@ local plugins = {
 		dependencies = { "nvim-tree/nvim-web-devicons", opt = true },
 	},
 
+	{
+		"nvimdev/lspsaga.nvim",
+		config = function()
+			require("lspsaga").setup({})
+		end,
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter", -- optional
+			"nvim-tree/nvim-web-devicons", -- optional
+		},
+	},
 
-    {
-        "nvimdev/lspsaga.nvim",
-        config = function()
-            require("lspsaga").setup({})
-        end,
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter", -- optional
-            "nvim-tree/nvim-web-devicons",     -- optional
-        },
-    },
+	-- Indentation selection
+	{
+		"michaeljsmith/vim-indent-object",
+	},
 
-    -- Indentation selection
-    {
-        "michaeljsmith/vim-indent-object"
-    },
+	-- Snippets
+	{
+		"L3MON4D3/LuaSnip",
+		-- follow latest release.
+		version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+		-- install jsregexp (optional!).
+		build = "make install_jsregexp",
+		dependencies = {
+			"rafamadriz/friendly-snippets",
+		},
+	},
 
-    -- Snippets
-    {
-        "L3MON4D3/LuaSnip",
-        -- follow latest release.
-        version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-        -- install jsregexp (optional!).
-        build = "make install_jsregexp",
-        dependencies = {
-            "rafamadriz/friendly-snippets",
-        },
-    },
+	-- Roslyn, for Blazor support
+	{ "tris203/rzls.nvim" },
+	{
+		"seblyng/roslyn.nvim",
+		ft = { "cs", "aspnetcorerazor" },
+		---@module 'roslyn.config'
+		---@type RoslynNvimConfig
+		opts = {
+			-- your configuration comes here; leave empty for default settings
+		},
+		dependencies = { "tris203/rzls.nvim", config = true },
+	},
 
-    -- Roslyn, for Blazor support
-    { "tris203/rzls.nvim" },
-    {
-        "seblyng/roslyn.nvim",
-        ft = { "cs", "aspnetcorerazor" },
-        ---@module 'roslyn.config'
-        ---@type RoslynNvimConfig
-        opts = {
-            -- your configuration comes here; leave empty for default settings
-        },
-        dependencies = { "tris203/rzls.nvim", config = true }
-    },
-
-    -- Supermaven autocomplete
-    {
-      "supermaven-inc/supermaven-nvim",
-      config = function()
-        local supermaven = require("supermaven-nvim")
-        supermaven.setup({})
-      end,
-    },
+	-- Supermaven autocomplete
+	{
+		"supermaven-inc/supermaven-nvim",
+		config = function()
+			local supermaven = require("supermaven-nvim")
+			supermaven.setup({})
+		end,
+	},
 }
 
 lazy.setup(plugins, opts)

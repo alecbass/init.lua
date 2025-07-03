@@ -13,26 +13,30 @@ local fmt = require("luasnip.extras.fmt").fmt
 local utils = require("snippets.utils")
 
 return {
-    s("slog",
-        fmt(
-            [[
+	s(
+		"slog",
+		fmt(
+			[[
               slog.Info("{}: ", "")
-            ]]
-        , {
-          -- It would be nice to use named keys here, but we get a weird position_so_far not found error when re-using
-          -- the same formatting key
-          d(1, utils.insert_file_name, {}, {}),
-        })
-    ),
-    s("slogd",
-        fmt(
-            [[
+            ]],
+			{
+				-- It would be nice to use named keys here, but we get a weird position_so_far not found error when re-using
+				-- the same formatting key
+				d(1, utils.insert_file_name, {}, {}),
+			}
+		)
+	),
+	s(
+		"slogd",
+		fmt(
+			[[
               slog.Debug("{}: ", "")
-            ]]
-        , {
-          -- It would be nice to use named keys here, but we get a weird position_so_far not found error when re-using
-          -- the same formatting key
-          d(1, utils.insert_file_name, {}, {}),
-        })
-    ),
+            ]],
+			{
+				-- It would be nice to use named keys here, but we get a weird position_so_far not found error when re-using
+				-- the same formatting key
+				d(1, utils.insert_file_name, {}, {}),
+			}
+		)
+	),
 }

@@ -28,4 +28,3 @@ require("luasnip.loaders.from_vscode").lazy_load()
 
 require("luasnip.loaders.from_lua").lazy_load({ include = { "all", "c", "lua", "typescript" } })
 require("luasnip.loaders.from_lua").lazy_load({ include = { "cpp" } })
-
