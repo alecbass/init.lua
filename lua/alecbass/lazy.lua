@@ -457,6 +457,20 @@ local plugins = {
 			supermaven.setup({})
 		end,
 	},
+
+	-- Grepic Nick recursive reference finder
+	{
+		"trkl-dev/references.nvim",
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+		},
+		config = function()
+			local references = require("references")
+
+            -- NOTE: This replaces the remap <leader>vrr binding
+			vim.keymap.set("n", "<leader>vrr", references.recursive_references, {})
+		end,
+	},
 }
 
 lazy.setup(plugins, opts)

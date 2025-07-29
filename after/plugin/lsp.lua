@@ -430,3 +430,8 @@ vim.lsp.enable("roslyn")
 --
 
 vim.lsp.enable("terraformls")
+
+--
+-- Arduino
+--
+vim.lsp.enable('arduino_language_server')
