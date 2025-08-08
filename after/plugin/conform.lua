@@ -12,8 +12,10 @@ conform.setup({
 		typescriptreact = { "prettier" },
 		rust = { "rustfmt" },
 		go = { "gofmt" },
-        terraform = { "terraform_fmt" },
-        tf = { "terraform_fmt" },
-        ["terraform-vars"] = { "terraform_fmt" },
+		terraform = { "terraform_fmt" },
+		tf = { "terraform_fmt" },
+		["terraform-vars"] = { "terraform_fmt" },
+		c = { "clang-format" },
+		cpp = { "clang-format" },
 	},
 })
