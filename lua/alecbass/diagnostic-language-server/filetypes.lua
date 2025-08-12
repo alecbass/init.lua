@@ -17,6 +17,9 @@ local filetypes = {
 	"vim",
 	"yaml",
 	"yaml.ansible",
+    "c",
+    "cpp",
+    "csharp",
 }
 
 return filetypes

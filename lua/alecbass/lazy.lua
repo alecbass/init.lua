@@ -39,7 +39,7 @@ local plugins = {
 	{ "tpope/vim-fugitive" },
 
 	-- Lspconfig
-	{ "neovim/nvim-lspconfig", version = "2.2.0" },
+	{ "neovim/nvim-lspconfig", version = "2.4.0" },
 
 	-- Debugging
 	{ "nvim-lua/plenary.nvim" },

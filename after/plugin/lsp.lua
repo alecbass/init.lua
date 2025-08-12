@@ -32,15 +32,9 @@ lspconfig.opts = {
 	},
 }
 
----
--- Replace these language servers
--- with the ones you have installed in your system
----
--- lspconfig.eslint.setup({
---   capabilities = capabilities,
--- })
-
+--
 -- Python
+--
 
 -- https://github.com/microsoft/pyright/blob/main/docs/configuration.md
 vim.lsp.config("pyright", {
@@ -48,6 +42,9 @@ vim.lsp.config("pyright", {
 	settings = {
 		python = {
 			analysis = {
+				autoSearchPaths = true,
+				diagnosticMode = "openFilesOnly",
+				useLibraryCodeForTypes = true,
 				reportWildcardImportFromLibrary = "none",
 				reportUnknownMemberType = "none",
 			},
@@ -58,9 +55,6 @@ vim.lsp.enable("pyright")
 
 vim.lsp.config("ruff", {
 	capabilities = capabilities,
-	on_attach = function(client, bufnr)
-		client.server_capabilities.hoverProvider = false
-	end,
 	init_options = {
 		settings = {
 			-- Any extra CLI arguments for `ruff` go here.
@@ -424,7 +418,6 @@ vim.lsp.config("roslyn", {
 -- vim.lsp.enable("roslyn_ls")
 vim.lsp.enable("roslyn")
 
-
 --
 -- Terraform
 --
@@ -434,4 +427,4 @@ vim.lsp.enable("terraformls")
 --
 -- Arduino
 --
-vim.lsp.enable('arduino_language_server')
+vim.lsp.enable("arduino_language_server")
