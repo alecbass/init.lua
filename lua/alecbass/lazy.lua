@@ -450,13 +450,7 @@ local plugins = {
 	},
 
 	-- Supermaven autocomplete
-	{
-		"supermaven-inc/supermaven-nvim",
-		config = function()
-			local supermaven = require("supermaven-nvim")
-			supermaven.setup({})
-		end,
-	},
+	{ "supermaven-inc/supermaven-nvim" },
 
 	-- Grepic Nick recursive reference finder
 	{
@@ -467,7 +461,7 @@ local plugins = {
 		config = function()
 			local references = require("references")
 
-            -- NOTE: This replaces the remap <leader>vrr binding
+			-- NOTE: This replaces the remap <leader>vrr binding
 			vim.keymap.set("n", "<leader>vrr", references.recursive_references, {})
 		end,
 	},
