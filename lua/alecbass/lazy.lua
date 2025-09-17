@@ -437,16 +437,18 @@ local plugins = {
 	},
 
 	-- Roslyn, for Blazor support
-	{ "tris203/rzls.nvim" },
 	{
 		"seblyng/roslyn.nvim",
-		ft = { "cs", "aspnetcorerazor" },
+		ft = { "cs", "razor", "aspnetcorerazor" },
 		---@module 'roslyn.config'
 		---@type RoslynNvimConfig
 		opts = {
 			-- your configuration comes here; leave empty for default settings
 		},
-		dependencies = { "tris203/rzls.nvim", config = true },
+		dependencies = {
+            "tris203/rzls.nvim",
+            config = true,
+        },
 	},
 
 	-- Supermaven autocomplete

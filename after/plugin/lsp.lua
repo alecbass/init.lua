@@ -357,31 +357,43 @@ vim.lsp.enable("cypher_ls")
 -- Should be supplied by the Nix flake requiring rzls
 ---@type string?
 local rzls_base_path = os.getenv("RZLS_BASE_PATH")
+local roslyn_base_path = os.getenv("ROSLYN_BASE_PATH")
 
 if rzls_base_path == nil then
 	-- RZLS_BASE_PATH is not set, cannot run Razor LSP
 	rzls_base_path = "./"
 end
 
+if roslyn_base_path == nil then
+	-- RZLS_BASE_PATH is not set, cannot run Razor LSP
+	roslyn_base_path = "./"
+end
+
+local rzls_lib_path = vim.fs.joinpath(rzls_base_path, "lib")
+local rzls_bin_path = vim.fs.joinpath(rzls_base_path, "bin")
+
 -- Add the Razor flags
 local cmd = {
-	"Microsoft.CodeAnalysis.LanguageServer",
+    "dotnet",
+    vim.fs.joinpath(roslyn_base_path, "lib", "roslyn-ls", "Microsoft.CodeAnalysis.LanguageServer.dll"),
+	-- "Microsoft.CodeAnalysis.LanguageServer",
 	"--stdio",
 	"--logLevel=Information",
 	"--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
 	"--razorSourceGenerator="
-		.. vim.fs.joinpath(rzls_base_path, "lib", "rzls", "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
+		.. vim.fs.joinpath(rzls_lib_path, "rzls", "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
 	"--razorDesignTimePath="
-		.. vim.fs.joinpath(rzls_base_path, "lib", "rzls", "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
+		.. vim.fs.joinpath(rzls_lib_path, "rzls", "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
 }
 
 vim.filetype.add({
 	extension = {
-		razor = "aspnetcorerazor",
-		cshtml = "aspnetcorerazor",
+		razor = "razor",
+		cshtml = "razor",
 	},
-	[".razor"] = "aspnetcorerazor",
+	[".razor"] = "razor",
 })
+
 
 require("roslyn").setup({
 	cmd = cmd,
@@ -391,10 +403,15 @@ require("roslyn").setup({
 	},
 })
 
+require("rzls").setup({
+    path = vim.fs.joinpath(rzls_bin_path, "rzls"),
+    capabilities = capabilities,
+})
+
 vim.lsp.config("roslyn", {
-	cmd = cmd,
-	filetypes = { "cs", "aspnetcorerazor" },
-	handlers = require("rzls.roslyn_handlers"),
+	filetypes = { "cs", "razor", "aspnetcorerazor" },
+    capabilities = capabilities,
+	-- handlers = require("rzls.roslyn_handlers"),
 	settings = {
 		["csharp|inlay_hints"] = {
 			csharp_enable_inlay_hints_for_implicit_object_creation = true,
@@ -415,7 +432,6 @@ vim.lsp.config("roslyn", {
 		},
 	},
 })
--- vim.lsp.enable("roslyn_ls")
 vim.lsp.enable("roslyn")
 
 --
