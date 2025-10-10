@@ -395,7 +395,7 @@ local plugins = {
 	{ "akinsho/bufferline.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
 
 	-- Conform
-	{ "stevearc/conform.nvim", branch = "nvim-0.9" },
+	{ "stevearc/conform.nvim", rev = "fbcb4fa7f34bfea9be702ffff481a8e336ebf6ed" },
 
 	-- Commenting
 	{

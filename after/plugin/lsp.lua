@@ -374,14 +374,13 @@ local rzls_bin_path = vim.fs.joinpath(rzls_base_path, "bin")
 
 -- Add the Razor flags
 local cmd = {
-    "dotnet",
-    vim.fs.joinpath(roslyn_base_path, "lib", "roslyn-ls", "Microsoft.CodeAnalysis.LanguageServer.dll"),
+	"dotnet",
+	vim.fs.joinpath(roslyn_base_path, "lib", "roslyn-ls", "Microsoft.CodeAnalysis.LanguageServer.dll"),
 	-- "Microsoft.CodeAnalysis.LanguageServer",
 	"--stdio",
 	"--logLevel=Information",
 	"--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
-	"--razorSourceGenerator="
-		.. vim.fs.joinpath(rzls_lib_path, "rzls", "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
+	"--razorSourceGenerator=" .. vim.fs.joinpath(rzls_lib_path, "rzls", "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
 	"--razorDesignTimePath="
 		.. vim.fs.joinpath(rzls_lib_path, "rzls", "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
 }
@@ -394,7 +393,6 @@ vim.filetype.add({
 	[".razor"] = "razor",
 })
 
-
 require("roslyn").setup({
 	cmd = cmd,
 	config = {
@@ -404,13 +402,13 @@ require("roslyn").setup({
 })
 
 require("rzls").setup({
-    path = vim.fs.joinpath(rzls_bin_path, "rzls"),
-    capabilities = capabilities,
+	path = vim.fs.joinpath(rzls_bin_path, "rzls"),
+	capabilities = capabilities,
 })
 
 vim.lsp.config("roslyn", {
 	filetypes = { "cs", "razor", "aspnetcorerazor" },
-    capabilities = capabilities,
+	capabilities = capabilities,
 	-- handlers = require("rzls.roslyn_handlers"),
 	settings = {
 		["csharp|inlay_hints"] = {
