@@ -216,6 +216,7 @@ vim.lsp.enable("bashls")
 --
 
 vim.lsp.config("djlsp", {
+    filetypes = { "htmldjango" },
 	capabilities = capabilities,
 })
 vim.lsp.enable("djlsp")
@@ -228,10 +229,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 vim.lsp.config("html", {
 	capabilities = capabilities,
-	settings = {
-		filetypes = { "html", "templ", "aspnetcorerazor" },
-	},
-	filetypes = { "html", "templ", "aspnetcorerazor" },
+	filetypes = { "html", "htmldjango", "templ", "aspnetcorerazor" },
 })
 vim.lsp.enable("html")
 
@@ -248,7 +246,7 @@ vim.lsp.enable("cssls")
 
 vim.lsp.config("htmx", {
 	capabilities = capabilities,
-	filetypes = { "html", "aspnetcorerazor" },
+	filetypes = { "html", "htmldjango", "aspnetcorerazor" },
 })
 vim.lsp.enable("htmx")
 

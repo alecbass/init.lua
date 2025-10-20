@@ -2,6 +2,7 @@ local conform = require("conform")
 
 conform.setup({
 	formatters_by_ft = {
+        html = { "djlint" },
 		lua = { "stylua" }, -- Install with `cargo install stylua`
 		-- Conform will run multiple formatters sequentially
 		python = { "ruff" },
@@ -19,3 +20,7 @@ conform.setup({
 		cpp = { "clang-format" },
 	},
 })
+
+conform.formatters.djlint = {
+    append_args = { "--reformat" } -- Save the file after format
+}
