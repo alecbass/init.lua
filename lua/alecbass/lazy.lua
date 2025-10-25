@@ -435,6 +435,12 @@ local plugins = {
 			"rafamadriz/friendly-snippets",
 		},
 	},
+    {
+        "rafamadriz/friendly-snippets",
+        rev = "572f5660cf05f8cd8834e096d7b4c921ba18e175"
+    },
+    -- Allows luasnip snippets to appear in nvim-cmp
+    { 'saadparwaiz1/cmp_luasnip' },
 
 	-- Roslyn, for Blazor support
 	{

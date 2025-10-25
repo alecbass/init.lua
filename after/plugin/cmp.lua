@@ -7,6 +7,7 @@ cmp.setup({
 		-- { name = "supermaven" },
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
+	}, {
 		{ name = "buffer" },
 	}),
 	window = {

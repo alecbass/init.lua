@@ -131,4 +131,46 @@ return {
 			title = c(1, { t("Mr."), t("Ms.") }),
 		})
 	),
+	-- Lambda function
+	s(
+        "lfn",
+		fmt(
+			[[
+              () => {{
+                {style}
+              }});
+            ]],
+			{
+				-- It would be nice to use named keys here, but we get a weird position_so_far not found error when re-using
+				-- the same formatting key
+                style = c(1, {
+                    t("hello"),
+                    t("yep")
+                }),
+				-- t("console.debug(\"hi\")")
+			}
+		)
+	),
+    -- Class function
+    --
+	s(
+        "cfn",
+		fmt(
+			[[
+              {public} {name}() {{
+                {body}
+              }});
+            ]],
+			{
+				-- It would be nice to use named keys here, but we get a weird position_so_far not found error when re-using
+				-- the same formatting key
+                public = c(1, {
+                    t("public"),
+                    t("private")
+                }),
+                name = t(io.read("*l")),
+                body = t("console.debug(\"test\");")
+			}
+		)
+	),
 }
