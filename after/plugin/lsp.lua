@@ -252,7 +252,9 @@ vim.lsp.enable("jsonls")
 --
 -- Docker Compose
 --
-vim.lsp.config("docker_compose_language_service", {})
+vim.lsp.config("docker_compose_language_service", {
+    capabilities = capabilities,
+})
 vim.lsp.enable("docker_compose_language_service")
 
 --
@@ -332,13 +334,6 @@ vim.lsp.config("lua_ls", {
 	capabilities = capabilities,
 })
 vim.lsp.enable("lua_ls")
-
---
--- Cypher (neo4j)
---
-
-vim.lsp.config("cypher_ls", {})
-vim.lsp.enable("cypher_ls")
 
 --
 -- Dotnet (C#)
@@ -427,9 +422,15 @@ vim.lsp.enable("roslyn")
 -- Terraform
 --
 
+vim.lsp.config("terraformls", {
+    capabilities = capabilities,
+})
 vim.lsp.enable("terraformls")
 
 --
 -- Arduino
 --
+vim.lsp.config("arduino_language_server", {
+    capabilities = capabilities,
+})
 vim.lsp.enable("arduino_language_server")
