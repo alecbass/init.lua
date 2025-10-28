@@ -4,7 +4,7 @@ local luasnip = require("luasnip")
 
 cmp.setup({
 	sources = cmp.config.sources({
-		{ name = "supermaven" },
+		-- { name = "supermaven" },
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
 	}, {
