@@ -434,12 +434,12 @@ local plugins = {
 			"rafamadriz/friendly-snippets",
 		},
 	},
-    {
-        "rafamadriz/friendly-snippets",
-        rev = "572f5660cf05f8cd8834e096d7b4c921ba18e175"
-    },
-    -- Allows luasnip snippets to appear in nvim-cmp
-    { 'saadparwaiz1/cmp_luasnip' },
+	{
+		"rafamadriz/friendly-snippets",
+		rev = "572f5660cf05f8cd8834e096d7b4c921ba18e175",
+	},
+	-- Allows luasnip snippets to appear in nvim-cmp
+	{ "saadparwaiz1/cmp_luasnip" },
 
 	-- Roslyn, for Blazor support
 	{
@@ -451,13 +451,17 @@ local plugins = {
 			-- your configuration comes here; leave empty for default settings
 		},
 		dependencies = {
-            "tris203/rzls.nvim",
-            config = true,
-        },
+			"tris203/rzls.nvim",
+			config = true,
+		},
 	},
 
 	-- Supermaven autocomplete
 	{ "supermaven-inc/supermaven-nvim" },
+	-- Llama LLM code completion
+	{
+		"ggml-org/llama.vim",
+	},
 
 	-- Grepic Nick recursive reference finder
 	{
