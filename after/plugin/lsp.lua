@@ -61,15 +61,16 @@ vim.lsp.config("ruff", {
 			args = {
 				"--line-length=120",
 			},
-			organizeImports = false,
-			["lint.run"] = "onSave",
+			-- organizeImports = false,
+			-- ["lint.run"] = "onSave",
+            ["ruff.configuration"] = "./pyproject.toml",
+            lineLength = 120,
+            configuration = "./pyproject.toml",
+            configurationPreference = "filesystemFirst",
 		},
 	},
 })
 
-vim.lsp.config("ruff", {
-    capabilities = capabilities,
-})
 vim.lsp.enable("ruff")
 
 --
