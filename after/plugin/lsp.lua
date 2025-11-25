@@ -396,7 +396,7 @@ require("rzls").setup({
 vim.lsp.config("roslyn", {
 	filetypes = { "cs", "razor", "aspnetcorerazor" },
 	capabilities = capabilities,
-	-- handlers = require("rzls.roslyn_handlers"),
+	handlers = require("rzls.roslyn_handlers"),
 	settings = {
 		["csharp|inlay_hints"] = {
 			csharp_enable_inlay_hints_for_implicit_object_creation = true,
