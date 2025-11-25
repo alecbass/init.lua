@@ -372,13 +372,13 @@ local cmd = {
 		.. vim.fs.joinpath(rzls_lib_path, "rzls", "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
 }
 
-vim.filetype.add({
-	extension = {
-		razor = "razor",
-		cshtml = "razor",
-	},
-	[".razor"] = "razor",
-})
+-- vim.filetype.add({
+-- 	extension = {
+-- 		razor = "razor",
+-- 		cshtml = "razor",
+-- 	},
+-- 	[".razor"] = "razor",
+-- })
 
 require("roslyn").setup({
 	cmd = cmd,
@@ -394,7 +394,7 @@ require("rzls").setup({
 })
 
 vim.lsp.config("roslyn", {
-	filetypes = { "cs", "razor", "aspnetcorerazor" },
+	filetypes = { "cs", "aspnetcorerazor" },
 	capabilities = capabilities,
 	handlers = require("rzls.roslyn_handlers"),
 	settings = {
