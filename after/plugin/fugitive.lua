@@ -10,7 +10,6 @@ function ToggleFugitive()
         if IsFugitiveFile(vim.api.nvim_buf_get_name(buf)) then
             was_fugitive_open = true
             vim.api.nvim_buf_delete(buf, { force = true })
-            break
         end
     end
 
