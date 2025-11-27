@@ -1,10 +1,3 @@
-function GoToMainWindow()
-    local windows = vim.api.nvim_tabpage_list_wins(0)
-    local main_window = windows[#windows] -- Right-most, which at the time of writing is the window with code
-
-    vim.api.nvim_set_current_win(main_window)
-end
-
 function IsFugitiveFile(name)
     local prefix = "fugitive://"
     return string.sub(name, 1, #prefix) == prefix
@@ -28,4 +21,3 @@ function ToggleFugitive()
 end
 
 vim.keymap.set("n", "<leader>gs", ToggleFugitive)
-vim.keymap.set("n", "<leader>gw", GoToMainWindow)

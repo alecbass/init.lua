@@ -44,3 +44,12 @@ end, opts)
 vim.keymap.set("n", "<leader><C-h>vrn", function()
 	vim.lsp.buf.signature_help()
 end, opts)
+
+function GoToMainWindow()
+    local windows = vim.api.nvim_tabpage_list_wins(0)
+    local main_window = windows[#windows] -- Right-most, which at the time of writing is the window with code
+
+    vim.api.nvim_set_current_win(main_window)
+end
+
+vim.keymap.set("n", "<leader>gw", GoToMainWindow)
