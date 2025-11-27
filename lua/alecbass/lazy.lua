@@ -483,6 +483,14 @@ local plugins = {
 			vim.keymap.set("n", "<leader>vrr", references.recursive_references, {})
 		end,
 	},
+    -- For `plugins/markview.lua` users.
+    {
+        "OXY2DEV/markview.nvim",
+        lazy = false,
+
+        -- Completion for `blink.cmp`
+        -- dependencies = { "saghen/blink.cmp" },
+    },
 }
 
 lazy.setup(plugins, opts)
