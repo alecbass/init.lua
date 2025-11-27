@@ -28,4 +28,4 @@ function ToggleFugitive()
 end
 
 vim.keymap.set("n", "<leader>gs", ToggleFugitive)
-vim.keymap.set("n", "<leader>gb", GoToMainWindow)
+vim.keymap.set("n", "<leader>gw", GoToMainWindow)
