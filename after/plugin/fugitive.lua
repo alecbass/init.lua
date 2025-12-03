@@ -21,3 +21,6 @@ function ToggleFugitive()
 end
 
 vim.keymap.set("n", "<leader>gs", ToggleFugitive)
+vim.keymap.set("n", "<leader>gm", function()
+    vim.cmd.Git("mergetool")
+end)
