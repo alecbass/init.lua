@@ -223,7 +223,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 vim.lsp.config("html", {
 	capabilities = capabilities,
-	filetypes = { "html", "htmldjango", "templ", "aspnetcorerazor" },
+	filetypes = { "html", "htmldjango", "templ", "razor" },
 })
 vim.lsp.enable("html")
 
@@ -240,7 +240,7 @@ vim.lsp.enable("cssls")
 
 vim.lsp.config("htmx", {
 	capabilities = capabilities,
-	filetypes = { "html", "htmldjango", "aspnetcorerazor" },
+	filetypes = { "html", "htmldjango", "razor" },
 })
 vim.lsp.enable("htmx")
 
@@ -341,8 +341,15 @@ vim.lsp.enable("lua_ls")
 --
 
 -- C# and Razor
+vim.filetype.add({
+	extension = {
+		razor = "razor",
+		cshtml = "razor",
+	},
+})
+
 vim.lsp.config("roslyn", {
-	filetypes = { "cs", "aspnetcorerazor" },
+	filetypes = { "cs", "razor" },
 	capabilities = capabilities,
 	settings = {
 		["csharp|inlay_hints"] = {
