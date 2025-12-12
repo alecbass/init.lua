@@ -63,10 +63,10 @@ vim.lsp.config("ruff", {
 			},
 			-- organizeImports = false,
 			-- ["lint.run"] = "onSave",
-            ["ruff.configuration"] = "./pyproject.toml",
-            lineLength = 120,
-            configuration = "./pyproject.toml",
-            configurationPreference = "filesystemFirst",
+			["ruff.configuration"] = "./pyproject.toml",
+			lineLength = 120,
+			configuration = "./pyproject.toml",
+			configurationPreference = "filesystemFirst",
 		},
 	},
 })
@@ -210,7 +210,7 @@ vim.lsp.enable("bashls")
 --
 
 vim.lsp.config("djlsp", {
-    filetypes = { "htmldjango" },
+	filetypes = { "htmldjango" },
 	capabilities = capabilities,
 })
 vim.lsp.enable("djlsp")
@@ -254,7 +254,7 @@ vim.lsp.enable("jsonls")
 -- Docker Compose
 --
 vim.lsp.config("docker_compose_language_service", {
-    capabilities = capabilities,
+	capabilities = capabilities,
 })
 vim.lsp.enable("docker_compose_language_service")
 
@@ -341,62 +341,9 @@ vim.lsp.enable("lua_ls")
 --
 
 -- C# and Razor
--- Should be supplied by the Nix flake requiring rzls
----@type string?
-local rzls_base_path = os.getenv("RZLS_BASE_PATH")
-local roslyn_base_path = os.getenv("ROSLYN_BASE_PATH")
-
-if rzls_base_path == nil then
-	-- RZLS_BASE_PATH is not set, cannot run Razor LSP
-	rzls_base_path = "./"
-end
-
-if roslyn_base_path == nil then
-	-- RZLS_BASE_PATH is not set, cannot run Razor LSP
-	roslyn_base_path = "./"
-end
-
-local rzls_lib_path = vim.fs.joinpath(rzls_base_path, "lib")
-local rzls_bin_path = vim.fs.joinpath(rzls_base_path, "bin")
-
--- Add the Razor flags
-local cmd = {
-	"dotnet",
-	vim.fs.joinpath(roslyn_base_path, "lib", "roslyn-ls", "Microsoft.CodeAnalysis.LanguageServer.dll"),
-	-- "Microsoft.CodeAnalysis.LanguageServer",
-	"--stdio",
-	"--logLevel=Information",
-	"--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
-	"--razorSourceGenerator=" .. vim.fs.joinpath(rzls_lib_path, "rzls", "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
-	"--razorDesignTimePath="
-		.. vim.fs.joinpath(rzls_lib_path, "rzls", "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
-}
-
--- vim.filetype.add({
--- 	extension = {
--- 		razor = "razor",
--- 		cshtml = "razor",
--- 	},
--- 	[".razor"] = "razor",
--- })
-
-require("roslyn").setup({
-	cmd = cmd,
-	config = {
-		-- the rest of your Roslyn configuration
-		handlers = require("rzls.roslyn_handlers"),
-	},
-})
-
-require("rzls").setup({
-	path = vim.fs.joinpath(rzls_bin_path, "rzls"),
-	capabilities = capabilities,
-})
-
 vim.lsp.config("roslyn", {
 	filetypes = { "cs", "aspnetcorerazor" },
 	capabilities = capabilities,
-	handlers = require("rzls.roslyn_handlers"),
 	settings = {
 		["csharp|inlay_hints"] = {
 			csharp_enable_inlay_hints_for_implicit_object_creation = true,
@@ -424,7 +371,7 @@ vim.lsp.enable("roslyn")
 --
 
 vim.lsp.config("terraformls", {
-    capabilities = capabilities,
+	capabilities = capabilities,
 })
 vim.lsp.enable("terraformls")
 
@@ -432,6 +379,6 @@ vim.lsp.enable("terraformls")
 -- Arduino
 --
 vim.lsp.config("arduino_language_server", {
-    capabilities = capabilities,
+	capabilities = capabilities,
 })
 vim.lsp.enable("arduino_language_server")

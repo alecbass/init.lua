@@ -450,10 +450,6 @@ local plugins = {
 		opts = {
 			-- your configuration comes here; leave empty for default settings
 		},
-		dependencies = {
-			"tris203/rzls.nvim",
-			config = true,
-		},
 	},
 
 	-- Supermaven autocomplete
@@ -461,13 +457,13 @@ local plugins = {
 	-- Llama LLM code completion
 	-- {
 	-- 	"ggml-org/llama.vim",
- --        init = function()
- --            vim.g.llama_config = {
- --                endpoint = "http://127.0.0.1:8080/v1/chat/completions",
- --                -- auto_fim = true,
- --            }
- --            vim.g.llama.disable()
- --        end,
+	--        init = function()
+	--            vim.g.llama_config = {
+	--                endpoint = "http://127.0.0.1:8080/v1/chat/completions",
+	--                -- auto_fim = true,
+	--            }
+	--            vim.g.llama.disable()
+	--        end,
 	-- },
 
 	-- Grepic Nick recursive reference finder
@@ -483,14 +479,14 @@ local plugins = {
 			vim.keymap.set("n", "<leader>vrr", references.recursive_references, {})
 		end,
 	},
-    -- For `plugins/markview.lua` users.
-    {
-        "OXY2DEV/markview.nvim",
-        lazy = false,
+	-- For `plugins/markview.lua` users.
+	{
+		"OXY2DEV/markview.nvim",
+		lazy = false,
 
-        -- Completion for `blink.cmp`
-        -- dependencies = { "saghen/blink.cmp" },
-    },
+		-- Completion for `blink.cmp`
+		-- dependencies = { "saghen/blink.cmp" },
+	},
 }
 
 lazy.setup(plugins, opts)
