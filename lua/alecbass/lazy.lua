@@ -487,6 +487,34 @@ local plugins = {
 		-- Completion for `blink.cmp`
 		-- dependencies = { "saghen/blink.cmp" },
 	},
+	{
+		"olimorris/codecompanion.nvim",
+		version = "18.1.1",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+		opts = {
+			-- NOTE: The log_level is in `opts.opts`
+			opts = {
+				log_level = "DEBUG", -- or "TRACE"
+			},
+		},
+	},
+
+	-- For pasting images into the buffer for CodeCompanion
+	{
+		"HakonHarnes/img-clip.nvim",
+		opts = {
+			filetypes = {
+				codecompanion = {
+					prompt_for_file_name = false,
+					template = "[Image]($FILE_PATH)",
+					use_absolute_path = true,
+				},
+			},
+		},
+	},
 }
 
 lazy.setup(plugins, opts)
