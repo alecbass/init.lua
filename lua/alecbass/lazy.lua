@@ -455,16 +455,16 @@ local plugins = {
 	-- Supermaven autocomplete
 	{ "supermaven-inc/supermaven-nvim" },
 	-- Llama LLM code completion
-	-- {
-	-- 	"ggml-org/llama.vim",
-	--        init = function()
-	--            vim.g.llama_config = {
-	--                endpoint = "http://127.0.0.1:8080/v1/chat/completions",
-	--                -- auto_fim = true,
-	--            }
-	--            vim.g.llama.disable()
-	--        end,
-	-- },
+	{
+		"ggml-org/llama.vim",
+		init = function()
+			vim.g.llama_config = {
+				-- endpoint = "http://127.0.0.1:8080/infill", -- Default is http://127.0.0.1:8012/infill
+				endpoint = "http://127.0.0.1:8012/infill", -- Default is http://127.0.0.1:8012/infill
+				auto_fim = true,
+			}
+		end,
+	},
 
 	-- Grepic Nick recursive reference finder
 	{
