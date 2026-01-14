@@ -458,11 +458,19 @@ local plugins = {
 	{
 		"ggml-org/llama.vim",
 		init = function()
+            local llama_server_endpoint = "http://127.0.0.1:8080/infill" -- Default is http://127.0.0.1:8012/infill
+            local status = os.execute(string.format("curl --silent --fail-with-body %s", llama_server_endpoint))
+            local is_failure = status > 0
+
 			vim.g.llama_config = {
 				-- endpoint = "http://127.0.0.1:8080/infill", -- Default is http://127.0.0.1:8012/infill
-				endpoint = "http://127.0.0.1:8012/infill", -- Default is http://127.0.0.1:8012/infill
+				endpoint = llama_server_endpoint,
 				auto_fim = true,
 			}
+
+            if is_failure then
+                -- vim.g.llama.disable()
+            end
 		end,
 	},
 
