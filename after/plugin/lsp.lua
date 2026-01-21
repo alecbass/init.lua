@@ -103,7 +103,6 @@ if js_formatter == "eslint" then
 
 	vim.lsp.config("eslint", {
 		on_attach = function(client, bufnr)
-			print(client, bufnr)
 			if not eslint_base_on_attach then
 				return
 			end
