@@ -20,7 +20,7 @@ local lazy = require("lazy")
 local plugins = {
 	{
 		"nvim-telescope/telescope.nvim",
-		version = "0.1.8",
+		version = "0.2.1",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"hrsh7th/nvim-cmp",
@@ -35,20 +35,21 @@ local plugins = {
 	},
 
 	{ "theprimeagen/harpoon" },
-	{ "mbbill/undotree" },
-	{ "tpope/vim-fugitive" },
+	{ "mbbill/undotree", rev = "3976ed63d7fb0cc47f6a778e230a390a399df69c" },
+	{ "tpope/vim-fugitive", rev = "61b51c09b7c9ce04e821f6cf76ea4f6f903e3cf4" },
 
 	-- Lspconfig
-	{ "neovim/nvim-lspconfig", version = "2.4.0" },
+	{ "neovim/nvim-lspconfig", version = "2.5.0" },
 
 	-- Debugging
-	{ "nvim-lua/plenary.nvim" },
-	{ "mfussenegger/nvim-dap" },
+	{ "nvim-lua/plenary.nvim", rev = "b9fd5226c2f76c951fc8ed5923d85e4de065e509" },
+	{ "mfussenegger/nvim-dap", version = "0.10.0" },
 
 	-- Colours
 	{
 		"rose-pine/neovim",
 		name = "rose-pine",
+		version = "v3.0.2",
 		config = function()
 			vim.cmd("colorscheme rose-pine")
 		end,
@@ -59,16 +60,16 @@ local plugins = {
 		"hrsh7th/nvim-cmp",
 		dependencies = "hrsh7th/cmp-nvim-lsp",
 	},
-	{ "hrsh7th/cmp-nvim-lsp" },
+	{ "hrsh7th/cmp-nvim-lsp", rev = "85bbfad83f804f11688d1ab9486b459e699292d6" },
 
 	-- Copilot
 	-- { "github/copilot.vim" },
-	{ "f-person/git-blame.nvim" },
+	{ "f-person/git-blame.nvim", rev = "5c536e2d4134d064aa3f41575280bc8a2a0e03d7" },
 
 	-- Diagnostic Language server
 	{
 		"creativenull/diagnosticls-configs-nvim",
-		tag = "v0.1.8", -- `tag` is optional
+		tag = "v0.1.12", -- `tag` is optional
 		dependencies = "neovim/nvim-lspconfig",
 	},
 
@@ -76,12 +77,13 @@ local plugins = {
 	{
 		"nvim-telescope/telescope-file-browser.nvim",
 		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
+		rev = "3610dc7dc91f06aa98b11dca5cc30dfa98626b7e",
 	},
 
 	-- neo-tree
 	{
 		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v3.x",
+		version = "v3.38.0",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
@@ -385,30 +387,33 @@ local plugins = {
 		end,
 	},
 
-	{ "nvim-treesitter/nvim-treesitter-context" },
+	{ "nvim-treesitter/nvim-treesitter-context", version = "1.0.0" },
 
 	-- Tabby
-	{ "nanozuki/tabby.nvim" },
+	{ "nanozuki/tabby.nvim", version = "2.8.1" },
 
 	-- Bufferline
-	{ "akinsho/bufferline.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
+	{ "akinsho/bufferline.nvim", version = "v4.9.1", dependencies = "nvim-tree/nvim-web-devicons" },
 
 	-- Conform
-	{ "stevearc/conform.nvim", rev = "fbcb4fa7f34bfea9be702ffff481a8e336ebf6ed" },
+	{ "stevearc/conform.nvim", version = "v9.1.0", rev = "fbcb4fa7f34bfea9be702ffff481a8e336ebf6ed" },
 
 	-- Commenting
 	{
 		"numToStr/Comment.nvim",
+		rev = "e30b7f2008e52442154b66f7c519bfd2f1e32acb",
 	},
 
 	-- Statusline
 	{
 		"nvim-lualine/lualine.nvim",
+		rev = "47f91c416daef12db467145e16bed5bbfe00add8",
 		dependencies = { "nvim-tree/nvim-web-devicons", opt = true },
 	},
 
 	{
 		"nvimdev/lspsaga.nvim",
+		rev = "8efe00d6aed9db6449969f889170f1a7e43101a1",
 		config = function()
 			require("lspsaga").setup({})
 		end,
@@ -421,29 +426,28 @@ local plugins = {
 	-- Indentation selection
 	{
 		"michaeljsmith/vim-indent-object",
+		rev = "8ab36d5ec2a3a60468437a95e142ce994df598c6",
 	},
 
 	-- Snippets
 	{
 		"L3MON4D3/LuaSnip",
 		-- follow latest release.
-		version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+		version = "v2.4.1", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
 		-- install jsregexp (optional!).
 		build = "make install_jsregexp",
 		dependencies = {
 			"rafamadriz/friendly-snippets",
 		},
 	},
-	{
-		"rafamadriz/friendly-snippets",
-		rev = "572f5660cf05f8cd8834e096d7b4c921ba18e175",
-	},
+	{ "rafamadriz/friendly-snippets", rev = "572f5660cf05f8cd8834e096d7b4c921ba18e175" },
 	-- Allows luasnip snippets to appear in nvim-cmp
-	{ "saadparwaiz1/cmp_luasnip" },
+	{ "saadparwaiz1/cmp_luasnip", rev = "98d9cb5c2c38532bd9bdb481067b20fea8f32e90" },
 
 	-- Roslyn, for Blazor support
 	{
 		"seblyng/roslyn.nvim",
+		rev = "2b9a8366a29b0a2a7e51cac87f3ca6345f617790",
 		ft = { "cs", "razor", "aspnetcorerazor" },
 		---@module 'roslyn.config'
 		---@type RoslynNvimConfig
@@ -453,14 +457,15 @@ local plugins = {
 	},
 
 	-- Supermaven autocomplete
-	{ "supermaven-inc/supermaven-nvim" },
+	{ "supermaven-inc/supermaven-nvim", rev = "07d20fce48a5629686aefb0a7cd4b25e33947d50" },
 	-- Llama LLM code completion
 	{
 		"ggml-org/llama.vim",
+		rev = "85ec507281e246ad3e4b1d945ed92eea0745f0fd",
 		init = function()
-            local llama_server_endpoint = "http://127.0.0.1:8080/infill" -- Default is http://127.0.0.1:8012/infill
-            local status = os.execute(string.format("curl --silent --fail-with-body %s", llama_server_endpoint))
-            local is_failure = status > 0
+			local llama_server_endpoint = "http://127.0.0.1:8080/infill" -- Default is http://127.0.0.1:8012/infill
+			local status = os.execute(string.format("curl --silent --fail-with-body %s", llama_server_endpoint))
+			local is_failure = status > 0
 
 			vim.g.llama_config = {
 				-- endpoint = "http://127.0.0.1:8080/infill", -- Default is http://127.0.0.1:8012/infill
@@ -468,15 +473,16 @@ local plugins = {
 				auto_fim = true,
 			}
 
-            if is_failure then
-                -- vim.g.llama.disable()
-            end
+			if is_failure then
+				-- vim.g.llama.disable()
+			end
 		end,
 	},
 
 	-- Grepic Nick recursive reference finder
 	{
 		"trkl-dev/references.nvim",
+		rev = "64823f9b07bececf81524d104273bf84c0a6327a",
 		dependencies = {
 			"nvim-telescope/telescope.nvim",
 		},
@@ -490,6 +496,7 @@ local plugins = {
 	-- For `plugins/markview.lua` users.
 	{
 		"OXY2DEV/markview.nvim",
+		version = "v28.00",
 		lazy = false,
 
 		-- Completion for `blink.cmp`
@@ -497,7 +504,7 @@ local plugins = {
 	},
 	{
 		"olimorris/codecompanion.nvim",
-		version = "18.1.1",
+		version = "18.5.0",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
@@ -513,6 +520,7 @@ local plugins = {
 	-- For pasting images into the buffer for CodeCompanion
 	{
 		"HakonHarnes/img-clip.nvim",
+		version = "v0.6.0",
 		opts = {
 			filetypes = {
 				codecompanion = {
