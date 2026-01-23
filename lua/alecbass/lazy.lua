@@ -469,7 +469,7 @@ local plugins = {
 
 			vim.g.llama_config = {
 				-- endpoint = "http://127.0.0.1:8080/infill", -- Default is http://127.0.0.1:8012/infill
-				endpoint = llama_server_endpoint,
+				endpoint_fim = llama_server_endpoint,
 				auto_fim = true,
 			}
 
