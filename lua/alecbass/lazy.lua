@@ -50,9 +50,6 @@ local plugins = {
 		"rose-pine/neovim",
 		name = "rose-pine",
 		version = "v3.0.2",
-		config = function()
-			vim.cmd("colorscheme rose-pine")
-		end,
 	},
 
 	-- Used for LSP completion windows
