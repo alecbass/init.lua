@@ -1,4 +1,3 @@
-local lspconfig = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local conform = require("conform")
 
@@ -25,12 +24,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "<F4>", vim.lsp.buf.code_action, opts)
 	end,
 })
-
-lspconfig.opts = {
-	inlay_hints = {
-		enabled = true,
-	},
-}
 
 --
 -- Python
@@ -127,6 +120,14 @@ vim.lsp.config("rust_analyzer", {
 	settings = {
 		["rust-analyzer"] = {
 			diagnostics = {
+				enable = true,
+			},
+            cargo = {
+              buildScripts = {
+                enable = true,
+              },
+            },
+			procMacro = {
 				enable = true,
 			},
 		},
