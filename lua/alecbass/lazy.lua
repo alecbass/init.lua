@@ -444,7 +444,7 @@ local plugins = {
 	-- Roslyn, for Blazor support
 	{
 		"seblyng/roslyn.nvim",
-		rev = "2b9a8366a29b0a2a7e51cac87f3ca6345f617790",
+		rev = "56c421a02451cc61c8d63cfe9dc2079453e1ea6d",
 		ft = { "cs", "razor", "aspnetcorerazor" },
 		---@module 'roslyn.config'
 		---@type RoslynNvimConfig
