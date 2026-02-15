@@ -122,11 +122,11 @@ vim.lsp.config("rust_analyzer", {
 			diagnostics = {
 				enable = true,
 			},
-            cargo = {
-              buildScripts = {
-                enable = true,
-              },
-            },
+			cargo = {
+				buildScripts = {
+					enable = true,
+				},
+			},
 			procMacro = {
 				enable = true,
 			},
