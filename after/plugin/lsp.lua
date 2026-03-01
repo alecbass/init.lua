@@ -126,6 +126,7 @@ vim.lsp.config("rust_analyzer", {
 				buildScripts = {
 					enable = true,
 				},
+                allFeatures = true,
 			},
 			procMacro = {
 				enable = true,
