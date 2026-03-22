@@ -461,7 +461,7 @@ local plugins = {
 		rev = "85ec507281e246ad3e4b1d945ed92eea0745f0fd",
 		init = function()
 			local llama_server_endpoint = "http://127.0.0.1:8080/infill" -- Default is http://127.0.0.1:8012/infill
-			local status = os.execute(string.format("curl --silent --fail-with-body %s", llama_server_endpoint))
+			local status = os.execute(string.format("curl --silent --fail-with-body -X GET %s", llama_server_endpoint))
 			local is_failure = status > 0
 
 			vim.g.llama_config = {
