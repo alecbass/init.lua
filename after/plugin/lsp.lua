@@ -1,4 +1,3 @@
-local lspconfig = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local conform = require("conform")
 
@@ -25,12 +24,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "<F4>", vim.lsp.buf.code_action, opts)
 	end,
 })
-
-lspconfig.opts = {
-	inlay_hints = {
-		enabled = true,
-	},
-}
 
 --
 -- Python
@@ -95,6 +88,29 @@ vim.lsp.config("vtsls", {
 })
 vim.lsp.enable("vtsls")
 
+local js_formatter = os.getenv("CONFORM_JAVASCRIPT_FORMATTER")
+
+-- Default to Prettier if no JavaScript formatter is set
+if js_formatter == "eslint" then
+	local eslint_base_on_attach = vim.lsp.config.eslint.on_attach
+
+	vim.lsp.config("eslint", {
+		on_attach = function(client, bufnr)
+			if not eslint_base_on_attach then
+				return
+			end
+
+			eslint_base_on_attach(client, bufnr)
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				buffer = bufnr,
+				command = "LspEslintFixAll",
+			})
+		end,
+	})
+
+	vim.lsp.enable("eslint")
+end
+
 --
 -- Rust
 --
@@ -104,6 +120,16 @@ vim.lsp.config("rust_analyzer", {
 	settings = {
 		["rust-analyzer"] = {
 			diagnostics = {
+				enable = true,
+			},
+			cargo = {
+				buildScripts = {
+					enable = true,
+				},
+				features = "all",
+				allFeatures = true,
+			},
+			procMacro = {
 				enable = true,
 			},
 		},
@@ -132,7 +158,6 @@ vim.lsp.enable("templ")
 --
 -- Diagnostic Language Server
 --
-local eslint = require("diagnosticls-configs.linters.eslint")
 local prettier = require("diagnosticls-configs.formatters.prettier")
 local black = require("diagnosticls-configs.formatters.black")
 local luacheck = require("diagnosticls-configs.linters.luacheck")
@@ -157,32 +182,6 @@ vim.lsp.config("diagnosticls", {
 				},
 				securities = {
 					info = "info",
-				},
-			},
-			eslint = {
-				sourceName = "eslint",
-				command = "./node_modules/.bin/eslint",
-				rootPatterns = { ".git" },
-				debounce = 100,
-				args = {
-					"--stdin",
-					"--stdin-filename",
-					"%filepath",
-					"--format",
-					"json",
-				},
-				parseJson = {
-					errorsRoot = "[0].messages",
-					line = "line",
-					column = "column",
-					endLine = "endLine",
-					endColumn = "endColumn",
-					message = "${message} [${ruleId}]",
-					security = "severity",
-				},
-				securities = {
-					[2] = "error",
-					[1] = "warning",
 				},
 			},
 		},
