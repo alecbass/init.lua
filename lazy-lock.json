@@ -12,7 +12,7 @@
   "harpoon": { "branch": "master", "commit": "1bc17e3e42ea3c46b33c0bbad6a880792692a1b3" },
   "img-clip.nvim": { "branch": "main", "commit": "0bb8b5ced45c2672c70184c87d014194b0705815" },
   "lazy.nvim": { "branch": "main", "commit": "306a05526ada86a7b30af95c5cc81ffba93fef97" },
-  "llama.vim": { "branch": "master", "commit": "a1c8e6e40cb45df59b78add5b65d575386832465" },
+  "llama.vim": { "branch": "master", "commit": "4103c5c764c875b814e2cd7f60753a3b2f0cba18" },
   "lspsaga.nvim": { "branch": "main", "commit": "562d9724e3869ffd1801c572dd149cc9f8d0cc36" },
   "lualine.nvim": { "branch": "master", "commit": "47f91c416daef12db467145e16bed5bbfe00add8" },
   "markview.nvim": { "branch": "main", "commit": "03fe3f42093d47a8536276f682cf057f8c14033b" },
