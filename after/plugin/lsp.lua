@@ -348,7 +348,6 @@ vim.filetype.add({
 })
 
 vim.lsp.config("roslyn", {
-	filetypes = { "cs", "razor" },
 	capabilities = capabilities,
 	settings = {
 		["csharp|inlay_hints"] = {
@@ -368,6 +367,11 @@ vim.lsp.config("roslyn", {
 		["csharp|code_lens"] = {
 			dotnet_enable_references_code_lens = true,
 		},
+        ["csharp|completion"] = {
+            dotnet_provide_regex_completions = true,
+            dotnet_show_completion_items_from_unimported_namespaces = true,
+            dotnet_show_name_completion_suggestions = true,
+        }
 	},
 })
 vim.lsp.enable("roslyn")
