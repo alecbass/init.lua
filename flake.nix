@@ -2,7 +2,7 @@
   description = "Nix flake for editing this repository.";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     flake-utils.url  = "github:numtide/flake-utils";
   };
   outputs = inputs@{ self, nixpkgs, flake-utils }:

@@ -26,13 +26,13 @@ local plugins = {
 			"hrsh7th/nvim-cmp",
 		},
 	},
-	{
-		"nvim-treesitter/nvim-treesitter",
-		version = "v0.10.0",
-		config = function()
-			vim.cmd(":TSUpdate")
-		end,
-	},
+	-- {
+	-- 	"nvim-treesitter/nvim-treesitter",
+	-- 	version = "v0.10.0",
+	-- 	config = function()
+	-- 		vim.cmd(":TSUpdate")
+	-- 	end,
+	-- },
 
 	{ "theprimeagen/harpoon" },
 	{ "mbbill/undotree", rev = "3976ed63d7fb0cc47f6a778e230a390a399df69c" },
@@ -384,7 +384,7 @@ local plugins = {
 		end,
 	},
 
-	{ "nvim-treesitter/nvim-treesitter-context", version = "1.0.0" },
+	-- { "nvim-treesitter/nvim-treesitter-context", version = "1.0.0" },
 
 	-- Tabby
 	{ "nanozuki/tabby.nvim", version = "2.8.1" },
@@ -415,7 +415,7 @@ local plugins = {
 			require("lspsaga").setup({})
 		end,
 		dependencies = {
-			"nvim-treesitter/nvim-treesitter", -- optional
+			-- "nvim-treesitter/nvim-treesitter", -- optional
 			"nvim-tree/nvim-web-devicons", -- optional
 		},
 	},
@@ -531,20 +531,20 @@ local plugins = {
 		-- Completion for `blink.cmp`
 		-- dependencies = { "saghen/blink.cmp" },
 	},
-	{
-		"olimorris/codecompanion.nvim",
-		version = "18.5.0",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-treesitter/nvim-treesitter",
-		},
-		opts = {
-			-- NOTE: The log_level is in `opts.opts`
-			opts = {
-				log_level = "DEBUG", -- or "TRACE"
-			},
-		},
-	},
+	-- {
+	-- 	"olimorris/codecompanion.nvim",
+	-- 	version = "18.5.0",
+	-- 	dependencies = {
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"nvim-treesitter/nvim-treesitter",
+	-- 	},
+	-- 	opts = {
+	-- 		-- NOTE: The log_level is in `opts.opts`
+	-- 		opts = {
+	-- 			log_level = "DEBUG", -- or "TRACE"
+	-- 		},
+	-- 	},
+	-- },
 
 	-- For pasting images into the buffer for CodeCompanion
 	{
