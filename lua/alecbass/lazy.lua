@@ -26,13 +26,13 @@ local plugins = {
 			"hrsh7th/nvim-cmp",
 		},
 	},
-	-- {
-	-- 	"nvim-treesitter/nvim-treesitter",
-	-- 	version = "v0.10.0",
-	-- 	config = function()
-	-- 		vim.cmd(":TSUpdate")
-	-- 	end,
-	-- },
+	{
+		"nvim-treesitter/nvim-treesitter",
+		version = "v0.10.0",
+		config = function()
+			vim.cmd(":TSUpdate")
+		end,
+	},
 
 	{ "theprimeagen/harpoon" },
 	{ "mbbill/undotree", rev = "3976ed63d7fb0cc47f6a778e230a390a399df69c" },
