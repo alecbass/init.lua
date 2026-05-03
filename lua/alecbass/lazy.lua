@@ -33,13 +33,14 @@ local plugins = {
 			vim.cmd(":TSUpdate")
 		end,
 	},
+	{ "nvim-treesitter/nvim-treesitter-context", version = "1.0.0" },
 
 	{ "theprimeagen/harpoon" },
 	{ "mbbill/undotree", rev = "3976ed63d7fb0cc47f6a778e230a390a399df69c" },
 	{ "tpope/vim-fugitive", rev = "61b51c09b7c9ce04e821f6cf76ea4f6f903e3cf4" },
 
 	-- Lspconfig
-	{ "neovim/nvim-lspconfig", version = "2.5.0" },
+	{ "neovim/nvim-lspconfig", version = "2.8.0" },
 
 	-- Debugging
 	{ "nvim-lua/plenary.nvim", rev = "b9fd5226c2f76c951fc8ed5923d85e4de065e509" },
@@ -80,7 +81,7 @@ local plugins = {
 	-- neo-tree
 	{
 		"nvim-neo-tree/neo-tree.nvim",
-		version = "v3.38.0",
+		version = "v3.40.0",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
@@ -384,8 +385,6 @@ local plugins = {
 		end,
 	},
 
-	-- { "nvim-treesitter/nvim-treesitter-context", version = "1.0.0" },
-
 	-- Tabby
 	{ "nanozuki/tabby.nvim", version = "2.8.1" },
 
@@ -404,21 +403,21 @@ local plugins = {
 	-- Statusline
 	{
 		"nvim-lualine/lualine.nvim",
-		rev = "47f91c416daef12db467145e16bed5bbfe00add8",
+		rev = "131a558e13f9f28b15cd235557150ccb23f89286",
 		dependencies = { "nvim-tree/nvim-web-devicons", opt = true },
 	},
 
-	{
-		"nvimdev/lspsaga.nvim",
-		rev = "8efe00d6aed9db6449969f889170f1a7e43101a1",
-		config = function()
-			require("lspsaga").setup({})
-		end,
-		dependencies = {
-			-- "nvim-treesitter/nvim-treesitter", -- optional
-			"nvim-tree/nvim-web-devicons", -- optional
-		},
-	},
+	-- {
+	-- 	"nvimdev/lspsaga.nvim",
+	-- 	rev = "8efe00d6aed9db6449969f889170f1a7e43101a1",
+	-- 	config = function()
+	-- 		require("lspsaga").setup({})
+	-- 	end,
+	-- 	dependencies = {
+	-- 		"nvim-treesitter/nvim-treesitter", -- optional
+	-- 		"nvim-tree/nvim-web-devicons", -- optional
+	-- 	},
+	-- },
 
 	-- Indentation selection
 	{
@@ -430,21 +429,21 @@ local plugins = {
 	{
 		"L3MON4D3/LuaSnip",
 		-- follow latest release.
-		version = "v2.4.1", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+		version = "v2.5.0", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
 		-- install jsregexp (optional!).
 		build = "make install_jsregexp",
 		dependencies = {
 			"rafamadriz/friendly-snippets",
 		},
 	},
-	{ "rafamadriz/friendly-snippets", rev = "572f5660cf05f8cd8834e096d7b4c921ba18e175" },
+	{ "rafamadriz/friendly-snippets", rev = "6cd7280adead7f586db6fccbd15d2cac7e2188b9" },
 	-- Allows luasnip snippets to appear in nvim-cmp
 	{ "saadparwaiz1/cmp_luasnip", rev = "98d9cb5c2c38532bd9bdb481067b20fea8f32e90" },
 
 	-- Roslyn, for Blazor support
 	{
 		"seblyng/roslyn.nvim",
-		rev = "56c421a02451cc61c8d63cfe9dc2079453e1ea6d",
+		rev = "b62d1a588765f0aa1b46ed260252c9e456408835",
 		ft = { "cs", "razor", "aspnetcorerazor" },
 		---@module 'roslyn.config'
 		---@type RoslynNvimConfig
@@ -525,7 +524,7 @@ local plugins = {
 	-- For `plugins/markview.lua` users.
 	{
 		"OXY2DEV/markview.nvim",
-		version = "v28.00",
+		version = "v28.2.0",
 		lazy = false,
 
 		-- Completion for `blink.cmp`
