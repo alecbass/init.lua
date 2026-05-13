@@ -443,45 +443,67 @@ local plugins = {
 	-- Roslyn, for Blazor support
 	{
 		"seblyng/roslyn.nvim",
-		rev = "b62d1a588765f0aa1b46ed260252c9e456408835",
-		ft = { "cs", "razor", "aspnetcorerazor" },
+		-- rev = "b62d1a588765f0aa1b46ed260252c9e456408835",
+		ft = { "cs", "razor" },
+		lazy = false,
 		---@module 'roslyn.config'
 		---@type RoslynNvimConfig
-		opts = {
-			-- TODO(alec): Re-add file watching in .NET 11
-			filewatching = "off", -- https://github.com/seblyng/roslyn.nvim/issues/356#issuecomment-4292394332
-			extensions = {
-				razor = {
-					enabled = true,
-					config = function()
-						local razor_extension_path = require("roslyn.utils").find_razor_extension_path()
-						if razor_extension_path == nil then
-							return {
-								path = nil,
-							}
-						end
-
-						return {
-							path = vim.fs.joinpath(
-								razor_extension_path,
-								"Microsoft.VisualStudioCode.RazorExtension.dll"
-							),
-							args = {
-								"--razorSourceGenerator=" .. vim.fs.joinpath(
-									razor_extension_path,
-									"Microsoft.CodeAnalysis.Razor.Compiler.dll"
-								),
-								"--razorDesignTimePath=" .. vim.fs.joinpath(
-									razor_extension_path,
-									"Targets",
-									"Microsoft.NET.Sdk.Razor.DesignTime.targets"
-								),
-							},
-						}
-					end,
-				},
-			},
-		},
+		-- opts = {
+		-- 	-- TODO(alec): Re-add file watching in .NET 11
+		-- 	filewatching = "off", -- https://github.com/seblyng/roslyn.nvim/issues/356#issuecomment-4292394332
+		-- 	extensions = {
+		-- 		razor = {
+		-- 			enabled = false,
+		-- 			config = function()
+		-- 				local razor_extension_path = require("roslyn.utils").find_razor_extension_path()
+		-- 				print(razor_extension_path)
+		--
+		-- 				if razor_extension_path == nil then
+		-- 					return {
+		-- 						path = nil,
+		-- 					}
+		-- 				end
+		--
+		-- 				return {
+		-- 					path = vim.fs.joinpath(
+		-- 						razor_extension_path,
+		-- 						"Microsoft.VisualStudioCode.RazorExtension.dll"
+		-- 					),
+		-- 					args = {
+		-- 						"--razorSourceGenerator=" .. vim.fs.joinpath(
+		-- 							razor_extension_path,
+		-- 							"Microsoft.CodeAnalysis.Razor.Compiler.dll"
+		-- 						),
+		-- 						"--razorDesignTimePath=" .. vim.fs.joinpath(
+		-- 							razor_extension_path,
+		-- 							"Targets",
+		-- 							"Microsoft.NET.Sdk.Razor.DesignTime.targets"
+		-- 						),
+		-- 					},
+		-- 				}
+		-- 			end,
+		-- 		},
+		-- 	},
+		-- },
+		config = function ()
+		    local cmd = {
+                -- "Microsoft.CodeAnalysis.LanguageServer.dll",
+                "Microsoft.CodeAnalysis.LanguageServer",
+                "--logLevel", -- this property is required by the server
+                "Information",
+                "--extensionLogDirectory", -- this property is required by the server
+                vim.fs.joinpath(vim.uv.os_tmpdir(), "roslyn_ls/logs"),
+                "--stdio",
+                }
+		    vim.lsp.config("roslyn", {
+                cmd = cmd,
+		    })
+		end,
+		on_attach = function()
+			print("This will run when the server attaches!")
+			local razor_extension_path = require("roslyn.utils").find_razor_extension_path()
+			print(razor_extension_path)
+		end,
 	},
 
 	-- Supermaven autocomplete

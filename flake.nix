@@ -18,6 +18,7 @@
             neovim # For editing
             lua-language-server # For editing files
             stylua # For conform linting
+            opencode
           ];
         };
       }
