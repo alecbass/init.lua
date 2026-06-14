@@ -59,13 +59,13 @@ return {
                 static styles = css``;
 
                 @property()
-                value = "placeholder";
+                private value: string = "placeholder";
 
-                connectedCallback() {{
+                connectedCallback(): void {{
                   super.connectedCallback();
                 }}
 
-                disconnectedCallback() {{
+                disconnectedCallback(): void {{
                   super.disconnectedCallback();
                 }}
 
@@ -133,7 +133,7 @@ return {
 	),
 	-- Lambda function
 	s(
-        "lfn",
+		"lfn",
 		fmt(
 			[[
               () => {{
@@ -143,18 +143,18 @@ return {
 			{
 				-- It would be nice to use named keys here, but we get a weird position_so_far not found error when re-using
 				-- the same formatting key
-                style = c(1, {
-                    t("hello"),
-                    t("yep")
-                }),
+				style = c(1, {
+					t("hello"),
+					t("yep"),
+				}),
 				-- t("console.debug(\"hi\")")
 			}
 		)
 	),
-    -- Class function
-    --
+	-- Class function
+	--
 	s(
-        "cfn",
+		"cfn",
 		fmt(
 			[[
               {public} {name}() {{
@@ -164,12 +164,12 @@ return {
 			{
 				-- It would be nice to use named keys here, but we get a weird position_so_far not found error when re-using
 				-- the same formatting key
-                public = c(1, {
-                    t("public"),
-                    t("private")
-                }),
-                name = t(io.read("*l")),
-                body = t("console.debug(\"test\");")
+				public = c(1, {
+					t("public"),
+					t("private"),
+				}),
+				name = t(io.read("*l")),
+				body = t('console.debug("test");'),
 			}
 		)
 	),

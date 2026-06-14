@@ -79,7 +79,7 @@ end
 
 function M.insert_tag_name(args, snip, old_state, user_args)
 	-- Just use the file name
-	local file_name = M.get_file_name() .. "-element"
+	local file_name = M.get_file_name()
 
 	return sn(nil, t(file_name))
 end
