@@ -71,10 +71,13 @@ vim.lsp.enable("ruff")
 --
 --
 
+local typescript_dir = os.getenv("LOCAL_TYPESCRIPT_TSDK")
+
 vim.lsp.config("vtsls", {
 	capabilities = capabilities,
 	settings = {
 		typescript = {
+			tsdk = typescript_dir,
 			inlayHints = {
 				parameterNames = { enabled = "literals" },
 				parameterTypes = { enabled = true },
@@ -84,6 +87,7 @@ vim.lsp.config("vtsls", {
 				enumMemberValues = { enabled = true },
 			},
 		},
+		autoUseWorkspaceTsdk = true,
 	},
 })
 vim.lsp.enable("vtsls")
@@ -349,10 +353,10 @@ vim.filetype.add({
 
 -- TODO(alec): See how the official roslyn-language-server works when it eventually gets .razor support
 require("mason").setup({
-    registries = {
-        "github:mason-org/mason-registry",
-        "github:Crashdummyy/mason-registry",
-    },
+	registries = {
+		"github:mason-org/mason-registry",
+		"github:Crashdummyy/mason-registry",
+	},
 })
 
 vim.lsp.config("roslyn", {
@@ -374,11 +378,11 @@ vim.lsp.config("roslyn", {
 		["csharp|code_lens"] = {
 			dotnet_enable_references_code_lens = true,
 		},
-        ["csharp|completion"] = {
-            dotnet_provide_regex_completions = true,
-            dotnet_show_completion_items_from_unimported_namespaces = true,
-            dotnet_show_name_completion_suggestions = true,
-        }
+		["csharp|completion"] = {
+			dotnet_provide_regex_completions = true,
+			dotnet_show_completion_items_from_unimported_namespaces = true,
+			dotnet_show_name_completion_suggestions = true,
+		},
 	},
 })
 
