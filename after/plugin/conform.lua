@@ -32,6 +32,7 @@ conform.setup({
 		["terraform-vars"] = { "terraform_fmt" },
 		c = { "clang-format" },
 		cpp = { "clang-format" },
+		nix = { "nixfmt" },
 	},
 })
 

@@ -402,3 +402,9 @@ vim.lsp.config("arduino_language_server", {
 	capabilities = capabilities,
 })
 vim.lsp.enable("arduino_language_server")
+
+
+--
+-- Nix
+--
+vim.lsp.enable("nixd")
