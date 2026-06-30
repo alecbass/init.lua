@@ -359,7 +359,8 @@ require("mason").setup({
 	},
 })
 
-vim.lsp.config("roslyn", {
+vim.lsp.config("roslyn_ls", {
+	filestypes = { "cs", "razor" },
 	settings = {
 		["csharp|inlay_hints"] = {
 			csharp_enable_inlay_hints_for_implicit_object_creation = true,
@@ -385,6 +386,7 @@ vim.lsp.config("roslyn", {
 		},
 	},
 })
+vim.lsp.enable("roslyn_ls")
 
 --
 -- Terraform
@@ -402,7 +404,6 @@ vim.lsp.config("arduino_language_server", {
 	capabilities = capabilities,
 })
 vim.lsp.enable("arduino_language_server")
-
 
 --
 -- Nix
