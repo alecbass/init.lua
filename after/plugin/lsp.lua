@@ -351,14 +351,6 @@ vim.filetype.add({
 	},
 })
 
--- TODO(alec): See how the official roslyn-language-server works when it eventually gets .razor support
-require("mason").setup({
-	registries = {
-		"github:mason-org/mason-registry",
-		"github:Crashdummyy/mason-registry",
-	},
-})
-
 vim.lsp.config("roslyn_ls", {
 	filestypes = { "cs", "razor" },
 	settings = {

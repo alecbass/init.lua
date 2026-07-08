@@ -440,11 +440,6 @@ local plugins = {
 	-- Allows luasnip snippets to appear in nvim-cmp
 	{ "saadparwaiz1/cmp_luasnip", rev = "98d9cb5c2c38532bd9bdb481067b20fea8f32e90" },
 
-	-- Mason, only used for install Razor extensions for roslyn-ls
-	{
-		"mason-org/mason.nvim",
-		opts = {},
-	},
 	-- Roslyn, for Blazor support
 	{
 		"seblyng/roslyn.nvim",
