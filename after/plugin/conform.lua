@@ -25,6 +25,7 @@ conform.setup({
 		javascriptreact = { js_formatter },
 		typescript = { js_formatter },
 		typescriptreact = { js_formatter },
+		css = { js_formatter },
 		rust = { "rustfmt" },
 		go = { "gofmt" },
 		terraform = { "terraform_fmt" },
