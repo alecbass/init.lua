@@ -264,18 +264,10 @@ vim.lsp.enable("docker_compose_language_service")
 --
 -- Docker
 --
-vim.lsp.config("dockerls", {
-	settings = {
-		docker = {
-			languageserver = {
-				formatter = {
-					ignoreMultilineInstructions = true,
-				},
-			},
-		},
-	},
+vim.lsp.config("docker_language_server", {
+    capabilities = capabilities,
 })
-vim.lsp.enable("dockerls")
+vim.lsp.enable("docker_language_server")
 
 --
 -- C/C++/Objective-C and Swift
