@@ -28,7 +28,7 @@ local plugins = {
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
-		version = "v0.10.0",
+        rev = "7248feaca45e4d944591497964bc19afa89ad1c6",
 		config = function()
 			vim.cmd(":TSUpdate")
 		end,
