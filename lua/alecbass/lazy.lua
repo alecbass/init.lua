@@ -28,7 +28,7 @@ local plugins = {
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
-        rev = "7248feaca45e4d944591497964bc19afa89ad1c6",
+		rev = "7248feaca45e4d944591497964bc19afa89ad1c6",
 		config = function()
 			vim.cmd(":TSUpdate")
 		end,
@@ -36,14 +36,13 @@ local plugins = {
 	{ "nvim-treesitter/nvim-treesitter-context", version = "1.0.0" },
 
 	{ "theprimeagen/harpoon" },
-	{ "mbbill/undotree", rev = "3976ed63d7fb0cc47f6a778e230a390a399df69c" },
-	{ "tpope/vim-fugitive", rev = "61b51c09b7c9ce04e821f6cf76ea4f6f903e3cf4" },
+	{ "mbbill/undotree", rev = "02b69aed427b848c4dca483fc5e9524b6019c296" },
+	{ "tpope/vim-fugitive", rev = "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0" },
 
 	-- Lspconfig
-	{ "neovim/nvim-lspconfig", version = "2.8.0" },
+	{ "neovim/nvim-lspconfig", version = "2.10.0" },
 
 	-- Debugging
-	{ "nvim-lua/plenary.nvim", rev = "b9fd5226c2f76c951fc8ed5923d85e4de065e509" },
 	{ "mfussenegger/nvim-dap", version = "0.10.0" },
 
 	-- Colours
@@ -57,8 +56,9 @@ local plugins = {
 	{
 		"hrsh7th/nvim-cmp",
 		dependencies = "hrsh7th/cmp-nvim-lsp",
+		rev = "2ffe79f1f021def8dd1fcd81deb16f1bb0d989f3",
 	},
-	{ "hrsh7th/cmp-nvim-lsp", rev = "85bbfad83f804f11688d1ab9486b459e699292d6" },
+	{ "hrsh7th/cmp-nvim-lsp", rev = "cbc7b02bb99fae35cb42f514762b89b5126651ef" },
 
 	-- Copilot
 	-- { "github/copilot.vim" },
@@ -81,14 +81,14 @@ local plugins = {
 	-- neo-tree
 	{
 		"nvim-neo-tree/neo-tree.nvim",
-		version = "v3.40.0",
+		version = "v3.41.0",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
 			"MunifTanjim/nui.nvim",
 			{
 				"s1n7ax/nvim-window-picker",
-				version = "2.*",
+				version = "2.4.0",
 				config = function()
 					require("window-picker").setup({
 						filter_rules = {
@@ -403,21 +403,9 @@ local plugins = {
 	-- Statusline
 	{
 		"nvim-lualine/lualine.nvim",
-		rev = "131a558e13f9f28b15cd235557150ccb23f89286",
+		rev = "221ce6b2d999187044529f49da6554a92f740a96",
 		dependencies = { "nvim-tree/nvim-web-devicons", opt = true },
 	},
-
-	-- {
-	-- 	"nvimdev/lspsaga.nvim",
-	-- 	rev = "8efe00d6aed9db6449969f889170f1a7e43101a1",
-	-- 	config = function()
-	-- 		require("lspsaga").setup({})
-	-- 	end,
-	-- 	dependencies = {
-	-- 		"nvim-treesitter/nvim-treesitter", -- optional
-	-- 		"nvim-tree/nvim-web-devicons", -- optional
-	-- 	},
-	-- },
 
 	-- Indentation selection
 	{
@@ -428,8 +416,7 @@ local plugins = {
 	-- Snippets
 	{
 		"L3MON4D3/LuaSnip",
-		-- follow latest release.
-		version = "v2.5.0", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+		version = "v2.5.0",
 		-- install jsregexp (optional!).
 		build = "make install_jsregexp",
 		dependencies = {
@@ -440,24 +427,16 @@ local plugins = {
 	-- Allows luasnip snippets to appear in nvim-cmp
 	{ "saadparwaiz1/cmp_luasnip", rev = "98d9cb5c2c38532bd9bdb481067b20fea8f32e90" },
 
-	-- Roslyn, for Blazor support
-	{
-		"seblyng/roslyn.nvim",
-		-- rev = "b62d1a588765f0aa1b46ed260252c9e456408835",
-		ft = { "cs", "razor" },
-		lazy = false,
-	},
 	-- Llama LLM code completion
 	{
 		"ggml-org/llama.vim",
-		rev = "85ec507281e246ad3e4b1d945ed92eea0745f0fd",
+		rev = "77db2afe488a7f700a2027527f17ab771988e358",
 		init = function()
 			local llama_server_endpoint = "http://127.0.0.1:8080/infill" -- Default is http://127.0.0.1:8012/infill
 			local status = os.execute(string.format("curl --silent --fail-with-body -X GET %s", llama_server_endpoint))
 			local is_failure = status > 0
 
 			vim.g.llama_config = {
-				-- endpoint = "http://127.0.0.1:8080/infill", -- Default is http://127.0.0.1:8012/infill
 				endpoint_fim = llama_server_endpoint,
 				auto_fim = true,
 			}
@@ -485,40 +464,11 @@ local plugins = {
 	-- For `plugins/markview.lua` users.
 	{
 		"OXY2DEV/markview.nvim",
-		version = "v28.2.0",
+		version = "v28.3.0",
 		lazy = false,
 
 		-- Completion for `blink.cmp`
 		-- dependencies = { "saghen/blink.cmp" },
-	},
-	-- {
-	-- 	"olimorris/codecompanion.nvim",
-	-- 	version = "18.5.0",
-	-- 	dependencies = {
-	-- 		"nvim-lua/plenary.nvim",
-	-- 		"nvim-treesitter/nvim-treesitter",
-	-- 	},
-	-- 	opts = {
-	-- 		-- NOTE: The log_level is in `opts.opts`
-	-- 		opts = {
-	-- 			log_level = "DEBUG", -- or "TRACE"
-	-- 		},
-	-- 	},
-	-- },
-
-	-- For pasting images into the buffer for CodeCompanion
-	{
-		"HakonHarnes/img-clip.nvim",
-		version = "v0.6.0",
-		opts = {
-			filetypes = {
-				codecompanion = {
-					prompt_for_file_name = false,
-					template = "[Image]($FILE_PATH)",
-					use_absolute_path = true,
-				},
-			},
-		},
 	},
 }
 
