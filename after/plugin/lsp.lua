@@ -265,7 +265,7 @@ vim.lsp.enable("docker_compose_language_service")
 -- Docker
 --
 vim.lsp.config("docker_language_server", {
-    capabilities = capabilities,
+	capabilities = capabilities,
 })
 vim.lsp.enable("docker_language_server")
 
@@ -393,3 +393,8 @@ vim.lsp.enable("arduino_language_server")
 -- Nix
 --
 vim.lsp.enable("nixd")
+
+--
+-- YAML
+--
+vim.lsp.enable("yamlls")
