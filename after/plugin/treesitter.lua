@@ -18,4 +18,6 @@ nvim_treesitter.install({
 	"jsx",
 	"tsx",
 	"go",
+	"json",
+	"yaml",
 })
