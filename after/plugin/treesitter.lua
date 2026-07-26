@@ -5,19 +5,22 @@ nvim_treesitter.setup({
 	install_dir = vim.fn.stdpath("data") .. "/site",
 })
 
-nvim_treesitter.install({
-	"lua",
-	"vim",
-	"vimdoc",
-	"javascript",
-	"typescript",
-	"c",
-	"cpp",
-	"rust",
-	"python",
-	"jsx",
-	"tsx",
-	"go",
-	"json",
-	"yaml",
-})
+-- At first launch, nvim_treesitter.install is nil for some reason
+if nvim_treesitter.install ~= nil then
+	nvim_treesitter.install({
+		"lua",
+		"vim",
+		"vimdoc",
+		"javascript",
+		"typescript",
+		"c",
+		"cpp",
+		"rust",
+		"python",
+		"jsx",
+		"tsx",
+		"go",
+		"json",
+		"yaml",
+	})
+end
