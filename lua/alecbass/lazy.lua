@@ -28,7 +28,7 @@ local plugins = {
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
-		rev = "a1bcffc8095c142ad1f7a9671a4ae180333f9209",
+		rev = "8b98b4470eb326f1c7b50dae79f8c963568e5720",
 		lazy = false,
 		build = ":TSUpdate",
 	},
@@ -39,7 +39,7 @@ local plugins = {
 	{ "tpope/vim-fugitive", rev = "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0" },
 
 	-- Lspconfig
-	{ "neovim/nvim-lspconfig", version = "2.10.0" },
+	{ "neovim/nvim-lspconfig", version = "2.11.0" },
 
 	-- Debugging
 	{ "mfussenegger/nvim-dap", version = "0.10.0" },
@@ -429,7 +429,7 @@ local plugins = {
 	-- Llama LLM code completion
 	{
 		"ggml-org/llama.vim",
-		rev = "77db2afe488a7f700a2027527f17ab771988e358",
+		version = "0.1.0",
 		init = function()
 			local llama_server_endpoint = "http://127.0.0.1:8080/infill" -- Default is http://127.0.0.1:8012/infill
 			local status = os.execute(string.format("curl --silent --fail-with-body -X GET %s", llama_server_endpoint))
