@@ -469,6 +469,12 @@ local plugins = {
 		-- Completion for `blink.cmp`
 		-- dependencies = { "saghen/blink.cmp" },
 	},
+
+	-- Local code autocomplete
+	{
+		"milanglacier/minuet-ai.nvim",
+		version = "0.10.0",
+	},
 }
 
 lazy.setup(plugins, opts)
