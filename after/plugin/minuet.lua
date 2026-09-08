@@ -7,33 +7,60 @@ require("minuet").setup({
 	-- power. Once you have a reliable estimate of your local computing power,
 	-- you should adjust the context window to a larger value.
 	context_window = 512,
+
+	--
+	-- llama.cpp
+	--
+	-- provider_options = {
+	-- 	openai_fim_compatible = {
+	-- 		-- For Windows users, TERM may not be present in environment variables.
+	-- 		-- Consider using APPDATA instead.
+	-- 		api_key = "TERM",
+	-- 		name = "Llama.cpp",
+	-- 		end_point = "http://localhost:8012/v1/completions",
+	-- 		-- The model is set by the llama-cpp server and cannot be altered
+	-- 		-- post-launch.
+	-- 		model = "PLACEHOLDER",
+	-- 		optional = {
+	-- 			max_tokens = 56,
+	-- 			top_p = 0.9,
+	-- 		},
+	-- 		-- Llama.cpp does not support the `suffix` option in FIM completion.
+	-- 		-- Therefore, we must disable it and manually populate the special
+	-- 		-- tokens required for FIM completion.
+	-- 		template = {
+	-- 			prompt = function(context_before_cursor, context_after_cursor, _)
+	-- 				return "<|fim_prefix|>"
+	-- 					.. context_before_cursor
+	-- 					.. "<|fim_suffix|>"
+	-- 					.. context_after_cursor
+	-- 					.. "<|fim_middle|>"
+	-- 			end,
+	-- 			suffix = false,
+	-- 		},
+	-- 	},
+	-- },
+
+	--
+	-- Opencode
+	--
+	request_timeout = 2.5,
+	throttle = 1500, -- Increase to reduce costs and avoid rate limits
+	debounce = 600, -- Increase to reduce costs and avoid rate limits
 	provider_options = {
-		openai_fim_compatible = {
-			-- For Windows users, TERM may not be present in environment variables.
-			-- Consider using APPDATA instead.
-			api_key = "TERM",
-			name = "Llama.cpp",
-			end_point = "http://localhost:8012/v1/completions",
-			-- The model is set by the llama-cpp server and cannot be altered
-			-- post-launch.
-			model = "PLACEHOLDER",
+		openai_compatible = {
+			api_key = "OPENCODE_GO_API_KEY",
+			end_point = "https://opencode.ai/zen/go/v1/chat/completions",
+			model = "deepseek-v4-flash",
+			name = "Opencode",
 			optional = {
 				max_tokens = 56,
 				top_p = 0.9,
-			},
-			-- Llama.cpp does not support the `suffix` option in FIM completion.
-			-- Therefore, we must disable it and manually populate the special
-			-- tokens required for FIM completion.
-			template = {
-				prompt = function(context_before_cursor, context_after_cursor, _)
-					return "<|fim_prefix|>"
-						.. context_before_cursor
-						.. "<|fim_suffix|>"
-						.. context_after_cursor
-						.. "<|fim_middle|>"
-				end,
-				suffix = false,
+				-- disable thinking to avoid first token latency
+				thinking = { type = "disabled" },
 			},
 		},
 	},
 })
+
+
