@@ -1,6 +1,19 @@
 require("minuet").setup({
 	virtualtext = {
-		auto_trigger_ft = { "lua", "rust", "javascript", "typescript", "python", "go", "bash", "markdown", "c", "cpp" },
+		auto_trigger_ft = {
+			"lua",
+			"rust",
+			"javascript",
+			"typescript",
+			"python",
+			"go",
+			"sh",
+			"bash",
+			"markdown",
+			"c",
+			"cpp",
+			"nix",
+		},
 		keymap = {
 			-- accept whole completion
 			accept = "<Tab>", -- "<A-A>",
