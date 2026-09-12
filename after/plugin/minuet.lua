@@ -1,3 +1,9 @@
+local should_run_minuet = os.getenv("NEOVIM_RUN_MINUET") == "1"
+
+if not should_run_minuet then
+	return
+end
+
 require("minuet").setup({
 	virtualtext = {
 		auto_trigger_ft = {
@@ -16,6 +22,8 @@ require("minuet").setup({
 			"markdown",
 			"c",
 			"cpp",
+			"csharp",
+			"cs",
 			"nix",
 		},
 		keymap = {
