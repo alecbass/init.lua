@@ -34,7 +34,6 @@ local plugins = {
 	},
 	{ "nvim-treesitter/nvim-treesitter-context", version = "1.0.0" },
 
-	{ "theprimeagen/harpoon" },
 	{ "mbbill/undotree", rev = "02b69aed427b848c4dca483fc5e9524b6019c296" },
 	{ "tpope/vim-fugitive", rev = "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0" },
 
@@ -425,26 +424,6 @@ local plugins = {
 	{ "rafamadriz/friendly-snippets", rev = "6cd7280adead7f586db6fccbd15d2cac7e2188b9" },
 	-- Allows luasnip snippets to appear in nvim-cmp
 	{ "saadparwaiz1/cmp_luasnip", rev = "98d9cb5c2c38532bd9bdb481067b20fea8f32e90" },
-
-	-- Llama LLM code completion
-	{
-		"ggml-org/llama.vim",
-		version = "0.1.0",
-		init = function()
-			local llama_server_endpoint = "http://127.0.0.1:8080/infill" -- Default is http://127.0.0.1:8012/infill
-			local status = os.execute(string.format("curl --silent --fail-with-body -X GET %s", llama_server_endpoint))
-			local is_failure = status > 0
-
-			vim.g.llama_config = {
-				endpoint_fim = llama_server_endpoint,
-				auto_fim = true,
-			}
-
-			if is_failure then
-				-- vim.g.llama.disable()
-			end
-		end,
-	},
 
 	-- Grepic Nick recursive reference finder
 	{
