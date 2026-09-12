@@ -24,6 +24,7 @@ require("minuet").setup({
 			"cpp",
 			"csharp",
 			"cs",
+            "razor",
 			"nix",
 		},
 		keymap = {

@@ -22,5 +22,8 @@ if nvim_treesitter.install ~= nil then
 		"go",
 		"json",
 		"yaml",
+        "csharp",
+        "cs",
+        "razor",
 	})
 end

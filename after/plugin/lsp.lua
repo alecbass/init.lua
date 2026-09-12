@@ -344,7 +344,7 @@ vim.filetype.add({
 })
 
 vim.lsp.config("roslyn_ls", {
-	filestypes = { "cs", "razor" },
+	filestypes = { "cs", "razor", "cshtml" },
 	settings = {
 		["csharp|inlay_hints"] = {
 			csharp_enable_inlay_hints_for_implicit_object_creation = true,
