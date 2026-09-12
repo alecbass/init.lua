@@ -336,15 +336,8 @@ vim.lsp.enable("lua_ls")
 --
 
 -- C# and Razor
-vim.filetype.add({
-	extension = {
-		razor = "razor",
-		cshtml = "razor",
-	},
-})
-
 vim.lsp.config("roslyn_ls", {
-	filestypes = { "cs", "razor", "cshtml" },
+	filetypes = { "cs", "razor" },
 	settings = {
 		["csharp|inlay_hints"] = {
 			csharp_enable_inlay_hints_for_implicit_object_creation = true,
