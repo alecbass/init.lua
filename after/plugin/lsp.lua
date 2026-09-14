@@ -46,6 +46,9 @@ vim.lsp.config("pyright", {
 })
 vim.lsp.enable("pyright")
 
+-- Install with `pip install pytest-language-server`
+vim.lsp.enable("pytest_language_server")
+
 vim.lsp.config("ruff", {
 	capabilities = capabilities,
 	init_options = {
