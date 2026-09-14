@@ -28,7 +28,7 @@ local plugins = {
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
-		rev = "de9f0f3dbdab1952f136dc7bd67ff3bafdf994da",
+		rev = "9a168f6357ed21c3a636e1727bc7d382abc451b8",
 		lazy = false,
 		build = ":TSUpdate",
 	},
