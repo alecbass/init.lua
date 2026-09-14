@@ -6,20 +6,22 @@ nvim_treesitter.setup({
 })
 
 -- At first launch, nvim_treesitter.install is nil for some reason
-nvim_treesitter.install({
-	"lua",
-	"vim",
-	"vimdoc",
-	"javascript",
-	"typescript",
-	"c",
-	"cpp",
-	"rust",
-	"python",
-	"jsx",
-	"tsx",
-	"go",
-	"json",
-	"yaml",
-	"razor",
-})
+if nvim_treesitter.install ~= nil then
+	nvim_treesitter.install({
+		"lua",
+		"vim",
+		"vimdoc",
+		"javascript",
+		"typescript",
+		"c",
+		"cpp",
+		"rust",
+		"python",
+		"jsx",
+		"tsx",
+		"go",
+		"json",
+		"yaml",
+		"razor",
+	})
+end
