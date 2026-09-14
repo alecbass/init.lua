@@ -47,7 +47,7 @@ local plugins = {
 	{
 		"rose-pine/neovim",
 		name = "rose-pine",
-		version = "v3.0.2",
+		rev = "ff483051a47e27d84bdef47703538df1ed9f4a47",
 	},
 
 	-- Used for LSP completion windows
