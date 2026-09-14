@@ -29,11 +29,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- Python
 --
 
--- https://github.com/microsoft/pyright/blob/main/docs/configuration.md
-vim.lsp.config("pyright", {
+-- https://docs.basedpyright.com/latest/
+vim.lsp.config("basedpyright", {
 	capabilities = capabilities,
 	settings = {
-		python = {
+		basedpyright = {
 			analysis = {
 				autoSearchPaths = true,
 				diagnosticMode = "openFilesOnly",
@@ -44,7 +44,7 @@ vim.lsp.config("pyright", {
 		},
 	},
 })
-vim.lsp.enable("pyright")
+vim.lsp.enable("basedpyright")
 
 -- Install with `pip install pytest-language-server`
 vim.lsp.enable("pytest_language_server")
