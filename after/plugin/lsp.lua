@@ -45,6 +45,9 @@ vim.lsp.config("basedpyright", {
 					reportUnannotatedClassAttribute = "none",
 					reportMissingTypeStubs = "none",
 				},
+				inlayHints = {
+					callArgumentNames = true,
+				},
 			},
 		},
 	},
