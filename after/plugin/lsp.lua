@@ -38,7 +38,7 @@ vim.lsp.config("basedpyright", {
 				autoSearchPaths = true,
 				diagnosticMode = "openFilesOnly",
 				useLibraryCodeForTypes = true,
-				typeCheckingMode = "basic",
+				typeCheckingMode = "standard",
 				diagnosticSeverityOverrides = {
 					reportWildcardImportFromLibrary = "none",
 					reportUnknownMemberType = "none",
@@ -47,6 +47,10 @@ vim.lsp.config("basedpyright", {
 				},
 				inlayHints = {
 					callArgumentNames = true,
+					variableTypes = true,
+					enumMemberValues = true,
+					functionReturnTypes = true,
+					genericTypes = true,
 				},
 			},
 		},
